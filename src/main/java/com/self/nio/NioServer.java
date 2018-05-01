@@ -80,11 +80,13 @@ public class NioServer {
         try {
             if (selectionKey.isValid() && selectionKey.isAcceptable()){
                 clientChannel = serverSocketChannel.accept();
-                // 设置成非阻塞
-                clientChannel.configureBlocking(false);
-                clientChannel.register(selector, SelectionKey.OP_READ);
+                if (null != clientChannel) {
+                    // 设置成非阻塞
+                    clientChannel.configureBlocking(false);
+                    clientChannel.register(selector, SelectionKey.OP_READ);
 
-                ++ clientId;
+                    ++ clientId;
+                }
             } else if(selectionKey.isValid() && selectionKey.isReadable()){
                 revBuffer.clear();
                 clientChannel = (SocketChannel)selectionKey.channel();
