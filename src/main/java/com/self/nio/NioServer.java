@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * 问题：https://blog.csdn.net/vhomes/article/details/5817289
+ *
  * @author shichen
  * @create 2018/5/1
  * @desc
@@ -52,6 +54,7 @@ public class NioServer {
      */
     private void listener() throws IOException {
         while (true) {
+            // 当注册事件到达时，方法返回，否则该方法会一直阻塞
             int eventCount = selector.select();
             if(eventCount == 0) {
                 continue;
@@ -102,7 +105,9 @@ public class NioServer {
                         clientMap.put(clientChannel, clientId);
 
                         //切换通道可写
-                        clientChannel.register(selector, SelectionKey.OP_WRITE);
+                        selectionKey.interestOps(SelectionKey.OP_WRITE);
+                        //此时重新注册一个写事件时，当调用此方法时，register当检测写事件已经存在时，
+                        //clientChannel.register(selector, SelectionKey.OP_WRITE);
                     }
                 } else {
                     closeClient(selectionKey, clientChannel);
@@ -122,7 +127,9 @@ public class NioServer {
                 clientChannel.write(sendBuffer);
 
                 //切换通道为可读
-                clientChannel.register(selector, SelectionKey.OP_READ);
+                selectionKey.interestOps(SelectionKey.OP_READ);
+                //此时重新注册一个写事件时，当调用此方法时，register当检测写事件已经存在时，
+                //clientChannel.register(selector, SelectionKey.OP_READ);
             }
         } catch (IOException e) {
             try {
