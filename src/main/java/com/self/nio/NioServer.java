@@ -79,6 +79,7 @@ public class NioServer {
         SocketChannel clientChannel = null;
         try {
             if (selectionKey.isValid() && selectionKey.isAcceptable()){
+                serverSocketChannel = (ServerSocketChannel) selectionKey.channel();
                 clientChannel = serverSocketChannel.accept();
                 if (null != clientChannel) {
                     // 设置成非阻塞
@@ -103,6 +104,8 @@ public class NioServer {
                         //切换通道可写
                         clientChannel.register(selector, SelectionKey.OP_WRITE);
                     }
+                } else {
+                    closeClient(selectionKey, clientChannel);
                 }
             } else if (selectionKey.isValid() && selectionKey.isWritable()) {
                 if (!msgMap.containsKey(selectionKey)) {
@@ -123,16 +126,20 @@ public class NioServer {
             }
         } catch (IOException e) {
             try {
-                selectionKey.cancel();
-                clientChannel.socket().close();
-                clientChannel.close();
-                System.out.println(simpleDateFormat.format(new Date()) + "客户端：" + clientMap.get(clientChannel) + "下线，处理的线程为：" + Thread.currentThread().getId());
-                msgMap.remove(selectionKey);
-                clientMap.remove(clientChannel);
+                closeClient(selectionKey, clientChannel);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
+    }
+
+    private void closeClient(SelectionKey selectionKey, SocketChannel clientChannel) throws IOException {
+        selectionKey.cancel();
+        clientChannel.socket().close();
+        clientChannel.close();
+        System.out.println(simpleDateFormat.format(new Date()) + "客户端：" + clientMap.get(clientChannel) + "下线，处理的线程为：" + Thread.currentThread().getId());
+        msgMap.remove(selectionKey);
+        clientMap.remove(clientChannel);
     }
 
     public static void main(String[] args) {
