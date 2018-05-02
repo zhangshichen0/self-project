@@ -93,6 +93,7 @@ public class NioServer {
                     ++ clientId;
                 }
             } else if(selectionKey.isValid() && selectionKey.isReadable()){
+                //TODO channel中数据读完 远程的另一端被关闭 有一个错误的pending 都会触发OP_READ事件，但是没有数据
                 revBuffer.clear();
                 clientChannel = (SocketChannel)selectionKey.channel();
 
