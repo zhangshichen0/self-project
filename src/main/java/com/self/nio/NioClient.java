@@ -76,8 +76,7 @@ public class NioClient {
                         sendBuffer.put(name.getBytes("UTF-8"));
                         sendBuffer.flip();
                         socketChannel.write(sendBuffer);
-                        key.interestOps(SelectionKey.OP_READ);
-                        //socketChannel.register(selector, SelectionKey.OP_READ);
+                        socketChannel.register(selector, SelectionKey.OP_READ);
                     } else if (key.isReadable()) {
                         revBuffer.clear();
                         int len = socketChannel.read(revBuffer);
@@ -86,8 +85,7 @@ public class NioClient {
                             String msg1 = new String(revBuffer.array(), 0, len);
                             System.out.println("服务端回应消息：" + msg1);
                         }
-                        key.interestOps(SelectionKey.OP_WRITE);
-                        //socketChannel.register(selector, SelectionKey.OP_WRITE);
+                        socketChannel.register(selector, SelectionKey.OP_WRITE);
                         isWait = false;
                     }
                 } catch (IOException e) {

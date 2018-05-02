@@ -106,9 +106,7 @@ public class NioServer {
                         clientMap.put(clientChannel, clientId);
 
                         //切换通道可写
-                        selectionKey.interestOps(SelectionKey.OP_WRITE);
-                        //此时重新注册一个写事件时，当调用此方法时，register当检测写事件已经存在时，
-                        //clientChannel.register(selector, SelectionKey.OP_WRITE);
+                        clientChannel.register(selector, SelectionKey.OP_WRITE);
                     }
                 } else {
                     closeClient(selectionKey, clientChannel);
@@ -128,9 +126,7 @@ public class NioServer {
                 clientChannel.write(sendBuffer);
 
                 //切换通道为可读
-                selectionKey.interestOps(SelectionKey.OP_READ);
-                //此时重新注册一个写事件时，当调用此方法时，register当检测写事件已经存在时，
-                //clientChannel.register(selector, SelectionKey.OP_READ);
+                clientChannel.register(selector, SelectionKey.OP_READ);
             }
         } catch (IOException e) {
             try {
