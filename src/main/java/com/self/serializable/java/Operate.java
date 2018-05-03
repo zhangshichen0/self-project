@@ -18,7 +18,7 @@ public class Operate<T> {
      * @throws FileNotFoundException
      */
     public void serializable(T t) throws IOException {
-        this.serializable(t, false);
+        this.serializable(t, true);
     }
 
     /**
