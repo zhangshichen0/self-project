@@ -32,11 +32,15 @@ public class Operate<T> {
      * @throws FileNotFoundException
      */
     public void serializable(List<T> list) throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         FileOutputStream fileOutputStream = new FileOutputStream("b.txt");
         ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
+        ObjectOutputStream outputStream1 = new ObjectOutputStream(byteArrayOutputStream);
         for (T t : list) {
             outputStream.writeObject(t);
+            outputStream1.writeObject(t);
         }
+        System.out.println("序列化后，文件大小：" + byteArrayOutputStream.toByteArray().length);
         outputStream.close();
         fileOutputStream.close();
     }
