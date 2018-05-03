@@ -18,9 +18,25 @@ public class Operate<T> {
      * @throws FileNotFoundException
      */
     public void serializable(T t) throws IOException {
-        ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("a.txt"));
+        this.serializable(t, false);
+    }
+
+    /**
+     *
+     * @param t
+     * @param cover 是否覆盖已存在的文件
+     */
+    public void serializable(T t, boolean cover) throws IOException {
+        FileOutputStream fileOutputStream = null;
+        File file = new File("a.txt");
+        if (file.exists() && cover) {
+            file.delete();
+        }
+        fileOutputStream = new FileOutputStream(file);
+        ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
         outputStream.writeObject(t);
         outputStream.close();
+        fileOutputStream.close();
     }
 
     /**
@@ -31,9 +47,11 @@ public class Operate<T> {
      * @throws ClassNotFoundException
      */
     public T deSerializable() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("a.txt"));
+        FileInputStream fileInputStream = new FileInputStream("a.txt");
+        ObjectInputStream ois = new ObjectInputStream(fileInputStream);
         T t = (T) ois.readObject();
         ois.close();
+        fileInputStream.close();
         return t;
     }
 }
