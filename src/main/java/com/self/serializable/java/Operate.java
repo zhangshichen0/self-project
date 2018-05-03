@@ -18,21 +18,7 @@ public class Operate<T> {
      * @throws FileNotFoundException
      */
     public void serializable(T t) throws IOException {
-        this.serializable(t, true);
-    }
-
-    /**
-     *
-     * @param t
-     * @param cover 是否覆盖已存在的文件
-     */
-    public void serializable(T t, boolean cover) throws IOException {
-        FileOutputStream fileOutputStream = null;
-        File file = new File("a.txt");
-        if (file.exists() && cover) {
-            file.delete();
-        }
-        fileOutputStream = new FileOutputStream(file);
+        FileOutputStream fileOutputStream = new FileOutputStream("a.txt");
         ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
         outputStream.writeObject(t);
         outputStream.close();
