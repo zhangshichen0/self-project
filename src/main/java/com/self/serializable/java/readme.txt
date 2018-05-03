@@ -1,0 +1,3 @@
+java序列化有两种方式：
+1.实现Serializable
+2.实现Externalizable
