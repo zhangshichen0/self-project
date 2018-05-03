@@ -26,6 +26,22 @@ public class Operate<T> {
     }
 
     /**
+     * 序列化方法
+     *
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
+    public void serializable(List<T> list) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream("b.txt");
+        ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
+        for (T t : list) {
+            outputStream.writeObject(t);
+        }
+        outputStream.close();
+        fileOutputStream.close();
+    }
+
+    /**
      * 反序列化的方法
      *
      * @throws IOException
