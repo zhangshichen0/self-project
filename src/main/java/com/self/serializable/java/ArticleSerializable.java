@@ -1,6 +1,11 @@
 package com.self.serializable.java;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author shichen
@@ -63,5 +68,28 @@ public class ArticleSerializable implements Serializable {
     @Override
     public String toString() {
         return "id:" + id + ", title:" + title + ", age:" + age + ", count:" + count;
+    }
+
+    /**
+     * TODO 自定义序列化过程，可以使用默认的
+     * @param oos
+     * @throws IOException
+     */
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+        oos.defaultWriteObject();
+        oos.writeObject(new Date());
+    }
+
+    /**
+     * TODO 自定义反序列化过程，可以使用默认的
+     * @param ois
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = (Date)ois.readObject();
+        System.out.println(simpleDateFormat.format(date));
     }
 }
