@@ -14,7 +14,7 @@ import java.io.*;
 public class TestXmlJaxbMain {
 
     public static void main(String[] args) {
-       /* Article article = new Article();
+        Article article = new Article();
         article.setId(1);
         article.setTitle("test");
         article.setAge(10);
@@ -25,16 +25,23 @@ public class TestXmlJaxbMain {
             JAXBContext context = JAXBContext.newInstance(article.getClass());
             Marshaller marshal = context.createMarshaller();
             marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            //输出到控制台
             marshal.marshal(article, System.out);
+
+            //输出到文件
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
             writer = new FileWriter("jaxbxml.xml");
             marshal.marshal(article, writer);
+            marshal.marshal(article, byteArrayOutputStream);
 
+            System.out.println("object:" + article + ", 序列化后大小：" + byteArrayOutputStream.toByteArray().length);
             writer.close();
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
         try {
             JAXBContext context = JAXBContext.newInstance(Article.class);
