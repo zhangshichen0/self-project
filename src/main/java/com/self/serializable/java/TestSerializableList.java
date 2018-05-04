@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author shichen
  * @create 2018/5/3
- * @desc 演示类序列化一遍后，如果遇到相同的类的对象，只
+ * @desc 演示类序列化一遍后，如果遇到相同的类的对象，只记录一次对象类信息
  */
 public class TestSerializableList {
 
