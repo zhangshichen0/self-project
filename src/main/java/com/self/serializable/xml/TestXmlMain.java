@@ -5,7 +5,7 @@ package com.self.serializable.xml;
  * @create 2018/5/4
  * @desc
  */
-public class TestMain {
+public class TestXmlMain {
 
     public static void main(String[] args) {
         Operate<Article> operate = new Operate<>();
