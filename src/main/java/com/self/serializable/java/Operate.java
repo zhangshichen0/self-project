@@ -1,7 +1,6 @@
 package com.self.serializable.java;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,9 +17,16 @@ public class Operate<T> {
      * @throws FileNotFoundException
      */
     public void serializable(T t) throws IOException {
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
         FileOutputStream fileOutputStream = new FileOutputStream("a.txt");
         ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
+        ObjectOutputStream outputStream1 = new ObjectOutputStream(byteOutputStream);
         outputStream.writeObject(t);
+        outputStream1.writeObject(t);
+
+        System.out.println("object:" + t + ",序列化后对象大小:" + byteOutputStream.toByteArray().length);
+
+        outputStream1.close();
         outputStream.close();
         fileOutputStream.close();
     }

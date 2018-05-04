@@ -31,8 +31,10 @@ public class ArticleSerializable implements Serializable {
     /**
      * 静态变量不被序列化
      */
-    private static Integer count = 0;
+    public static Integer count = 0;
 
+    public ArticleSerializable() {
+    }
 
     public ArticleSerializable(Integer id, String title, Integer age) {
         this.id = id;

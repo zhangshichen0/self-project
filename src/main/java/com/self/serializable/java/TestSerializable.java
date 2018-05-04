@@ -13,7 +13,11 @@ public class TestSerializable {
         Operate<ArticleSerializable> operate = new Operate<>();
 
         //TODO 测试静态变量是否被序列化，把序列化的代码注释掉
-        ArticleSerializable articleSerializable = new ArticleSerializable(1, "test", 1);
+        ArticleSerializable articleSerializable = new ArticleSerializable();
+        articleSerializable.setId(1);
+        articleSerializable.setTitle("test");
+        articleSerializable.setAge(10);
+        ArticleSerializable.count = 20;
 
         try {
             operate.serializable(articleSerializable);
