@@ -8,6 +8,9 @@ import java.io.Serializable;
  * @desc
  */
 public class UserVersionId implements Serializable {
+    /**
+     * 显示声明的两种方式，声明为1L也可以
+     */
     private static final long serialVersionUID = -302566327130117452L;
 
     private Integer id;
