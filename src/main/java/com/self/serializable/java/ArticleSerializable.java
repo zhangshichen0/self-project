@@ -71,7 +71,7 @@ public class ArticleSerializable implements Serializable {
     }
 
     /**
-     * TODO 自定义序列化过程，可以使用默认的
+     * TODO 自定义序列化过程，可以使用默认的，在ObjectOutPutStream第1496行，利用反射调用对象里的重写方法
      * @param oos
      * @throws IOException
      */
@@ -81,7 +81,7 @@ public class ArticleSerializable implements Serializable {
     }
 
     /**
-     * TODO 自定义反序列化过程，可以使用默认的
+     * TODO 自定义反序列化过程，可以使用默认的，在ObjectInPutStream第1909行，利用反射调用类中重写的方法
      * @param ois
      * @throws IOException
      * @throws ClassNotFoundException
