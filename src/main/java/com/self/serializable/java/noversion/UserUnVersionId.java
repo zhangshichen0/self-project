@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @create 2018/5/4
  * @desc
  */
-public class User implements Serializable{
+public class UserUnVersionId implements Serializable{
     private Integer id;
     private String name;
 
@@ -29,7 +29,7 @@ public class User implements Serializable{
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserUnVersionId{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
