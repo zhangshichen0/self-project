@@ -1,34 +1,34 @@
-package com.self.serializable.xml;
+package com.self.serializable.xml.jaxb;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author shichen
  * @create 2018/5/3
  * @desc java原生序列化
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class Article {
 
+    @XmlElement(name = "Id")
     private Integer id;
 
     /**
      * 文章标题
      */
+    @XmlElement(name = "Title")
     private String title;
 
     /**
-     * TODO 不被序列化
+     * TODO 不被序列化 当增加@XmlElement时，无法完成序列化，异常
      */
     private transient Integer age;
 
     /**
-     * 静态变量不被序列化
+     * TODO 增加注解后，能够写入到生成的xml文件中，但是反序列化后，无法拿到xml文件中的值
      */
+    @XmlElement
     public static Integer count = 0;
 
     public Article() {

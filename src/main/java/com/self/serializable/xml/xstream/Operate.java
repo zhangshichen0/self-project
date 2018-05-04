@@ -1,4 +1,4 @@
-package com.self.serializable.xml;
+package com.self.serializable.xml.xstream;
 
 import com.thoughtworks.xstream.XStream;
 
