@@ -7,7 +7,10 @@ import java.util.List;
 /**
  * @author shichen
  * @create 2018/5/3
- * @desc 演示类序列化一遍后，如果遇到相同的类的对象，只记录一次对象类信息
+ * @desc
+ *
+ * TODO 演示类序列化一遍后，如果遇到相同的类的对象，只记录一次对象类信息
+ * TODO 如果遇到的是同一个对象，则除了第一个对象存储信息外，其他都指向对象的引用
  */
 public class TestSerializableList {
 
