@@ -1,0 +1,11 @@
+syntax="proto3";
+package com.self.serializable.protobuf;
+
+
+option java_package = "com.self.serializable.protobuf";
+option java_outer_classname = "Article";
+
+message ArticlePackage {
+	int32 id = 1;        // sort
+	string title = 2;
+}
