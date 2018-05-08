@@ -1,6 +1,7 @@
 package com.self.serializable.xml.webservice;
 
 
+import com.self.serializable.xml.webservice.client.JwsServiceHello;
 import com.self.serializable.xml.webservice.client.JwsServiceHelloService;
 
 /**
@@ -15,7 +16,8 @@ public class TestWebService {
     public static void main(String[] args) {
 
         JwsServiceHelloService jwsServiceHelloService = new JwsServiceHelloService();
-        System.out.println(jwsServiceHelloService.getJwsServiceHelloPort().getValue("ssss"));
+        JwsServiceHello jwsServiceHello = jwsServiceHelloService.getJwsServiceHelloPort();
+        System.out.println(jwsServiceHello.getValue("ssss"));
     }
 
 }
