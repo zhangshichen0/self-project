@@ -1,11 +1,13 @@
 package com.self.springmvc.model;
 
+import java.io.Serializable;
+
 /**
  * @author shichen
  * @create 2018/5/9
  * @desc
  */
-public class User {
+public class User implements Serializable {
     private Integer id;
     private String name;
     private Integer age;
