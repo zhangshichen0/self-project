@@ -11,6 +11,8 @@
 
     <properties>
         <spring-version>5.0.4.RELEASE</spring-version>
+        <slf4j.version>1.7.22</slf4j.version>
+        <logback.version>1.1.11</logback.version>
     </properties>
 
     <dependencies>
@@ -63,6 +65,50 @@
             <version>3.5.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.protobuf-java-format</groupId>
+            <artifactId>protobuf-java-format</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <!--logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!-- end of logging -->
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.9.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -86,6 +132,30 @@
                         <id>attach-sources</id>
                         <goals>
                             <goal>jar-no-fork</goal><!-- 类似执行mvn source:jar -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--根据指定的protoc文件，生成java代码-->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <tasks>
+                                <!--<mkdir dir="src/main/java/com/self/springmvc/protobuf"/>-->
+                                <exec failonerror="true" executable="protoc">
+                                    <arg value="--java_out=src/main/java/com/self/springmvc/model"/>
+                                    <arg value="src/main/java/com/self/springmvc/protobuf/user.proto"/>
+                                </exec>
+                            </tasks>
+                            <sourceRoot>src/main/java/com/self/springmvc/model</sourceRoot>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>

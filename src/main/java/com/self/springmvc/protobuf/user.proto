@@ -1,0 +1,12 @@
+syntax="proto3";
+package com.self.springmvc.model;
+
+
+option java_package = "com.self.springmvc.model";
+option java_outer_classname = "UserProto";
+
+message UserPackage {
+	int32 id = 1;        // sort
+	string name = 2;
+	int32 age = 3;
+}
