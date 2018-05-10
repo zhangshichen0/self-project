@@ -77,6 +77,21 @@
             <version>1.4</version>
         </dependency>
 
+        <!-- avro start -->
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-tools</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+
+        <!-- avro end -->
+
         <!--logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -138,7 +153,7 @@
             </plugin>
 
             <!--根据指定的protoc文件，生成java代码-->
-            <plugin>
+            <!--<plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
@@ -146,9 +161,9 @@
                         <phase>generate-sources</phase>
                         <configuration>
                             <tasks>
-                                <!--<mkdir dir="src/main/java/com/self/springmvc/protobuf"/>-->
+                                &lt;!&ndash;<mkdir dir="src/main/java/com/self/springmvc/protobuf"/>&ndash;&gt;
                                 <exec failonerror="true" executable="protoc">
-                                    <arg value="--java_out=src/main/java/com/self/springmvc/model"/>
+                                    <arg value="&#45;&#45;java_out=src/main/java/com/self/springmvc/model"/>
                                     <arg value="src/main/java/com/self/springmvc/protobuf/user.proto"/>
                                 </exec>
                             </tasks>
@@ -157,6 +172,31 @@
                         <goals>
                             <goal>run</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+
+            <!-- 根据avro schema 生成java代码 -->
+            <!--
+             java -jar /path/to/avro-tools-1.7.7.jar compile schema <schema file> <code destination>
+
+             //例如
+            java -jar avro-tools-1.7.7.jar compile schema article.avsc ./
+             -->
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>1.8.2</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/src/main/java/com/self/serializable/avro/</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
