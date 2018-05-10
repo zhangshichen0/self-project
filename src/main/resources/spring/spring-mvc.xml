@@ -18,8 +18,7 @@
         <!-- 增加消息转换器为JSON -->
         <mvc:message-converters>
             <!-- 增加到链中 -->
-            <!--<bean class="com.self.springmvc.converter.JavaSerializationConverter"/>-->
-
+            <bean class="com.self.springmvc.converter.JavaSerializationConverter"/>
             <!-- 配置protobuf转换器到链中 -->
             <bean class="org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter"/>
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>
