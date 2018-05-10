@@ -1,5 +1,6 @@
 package com.self.springmvc.test;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.self.http.HttpUtils;
 import com.self.springmvc.model.UserProto;
 import okhttp3.MediaType;
@@ -22,6 +23,16 @@ public class ProtobufTest {
         MediaType mediaType = MediaType.parse("Content-Type:application/x-protobuf");
         String result = HttpUtils.post("http://127.0.0.1:8080/serializable/protobuf/insert", headerMap, mediaType, userPackage.toByteArray());
         System.out.println(result);
+
+
+        //get获取数据
+        UserProto.UserPackage userPackage1 = null;
+        try {
+            userPackage1 = UserProto.UserPackage.parseFrom(HttpUtils.getBinary("http://127.0.0.1:8080/serializable/protobuf/get?id=1", headerMap));
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
+        System.out.println(userPackage1);
     }
 
 }
