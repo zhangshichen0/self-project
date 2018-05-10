@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.self.http;
 
@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author wangjinzhen
- *
  */
 public class HttpUtils {
     private static final OkHttpClient client;
@@ -38,9 +37,10 @@ public class HttpUtils {
             throw new RuntimeException("加载http content-type对应表异常", e);
         }
     }
-    
+
     /**
      * 获取媒体类型
+     *
      * @param file
      * @return
      */
@@ -53,9 +53,10 @@ public class HttpUtils {
         }
         return mediaType;
     }
-    
+
     /**
      * 获取媒体类型
+     *
      * @param fileName
      * @return
      */
@@ -70,6 +71,7 @@ public class HttpUtils {
 
     /**
      * 执行get请求
+     *
      * @param url
      * @param headers
      * @return
@@ -87,7 +89,7 @@ public class HttpUtils {
             if (response.isSuccessful()) {
                 return response.body().string();
             } else {
-                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]",url, response.code(), response.message(), response.body());
+                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]", url, response.code(), response.message(), response.body());
             }
 
         } catch (IOException e) {
@@ -95,13 +97,42 @@ public class HttpUtils {
         }
         return null;
     }
-    
+
     /**
-     * 执行post请求
-     * 
+     * 执行get请求
+     *
      * @param url
      * @param headers
-     * @param params 已经编码过的参数
+     * @return
+     */
+    public static byte[] getBinary(String url, Map<String, String> headers) {
+        Request.Builder requestBuilder = new Request.Builder().url(url);
+        if (headers != null) {
+            for (Entry<String, String> entry : headers.entrySet()) {
+                requestBuilder.addHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        Request request = requestBuilder.build();
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                return response.body().bytes();
+            } else {
+                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]", url, response.code(), response.message(), response.body());
+            }
+
+        } catch (IOException e) {
+            log.error("do get error, url={}", url, e);
+        }
+        return null;
+    }
+
+    /**
+     * 执行post请求
+     *
+     * @param url
+     * @param headers
+     * @param params  已经编码过的参数
      * @return
      */
     public static String post(String url, Map<String, String> headers, Map<String, String> params) {
@@ -121,7 +152,7 @@ public class HttpUtils {
             if (response.isSuccessful()) {
                 return response.body().string();
             } else {
-                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]",url, response.code(), response.message(), response.body());
+                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]", url, response.code(), response.message(), response.body());
             }
 
         } catch (IOException e) {
@@ -129,13 +160,13 @@ public class HttpUtils {
         }
         return null;
     }
-    
+
     /**
      * 执行post请求，多媒体上传
-     * 
+     *
      * @param url
      * @param headers
-     * @param params 已经编码过的参数
+     * @param params  已经编码过的参数
      * @return
      */
     public static String postMultipart(String url, Map<String, String> headers, Map<String, Object> params) {
@@ -156,7 +187,7 @@ public class HttpUtils {
             } else {
                 bodyBuilder.addFormDataPart(entry.getKey(), entry.getValue().toString());
             }
-            
+
         }
         Request request = requestBuilder.post(bodyBuilder.build()).build();
         try {
@@ -164,16 +195,17 @@ public class HttpUtils {
             if (response.isSuccessful()) {
                 return response.body().string();
             } else {
-                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]",url, response.code(), response.message(), response.body());
+                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]", url, response.code(), response.message(), response.body());
             }
         } catch (IOException e) {
             log.error("do post error, url={}", url, e);
         }
         return null;
     }
-    
+
     /**
      * 执行post请求
+     *
      * @param url
      * @param headers
      * @param mediaType
@@ -194,16 +226,17 @@ public class HttpUtils {
             if (response.isSuccessful()) {
                 return response.body().string();
             } else {
-                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]",url, response.code(), response.message(), response.body());
+                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]", url, response.code(), response.message(), response.body());
             }
         } catch (IOException e) {
             log.error("do post error, url={}", url, e);
         }
         return null;
     }
-    
+
     /**
      * 执行post请求
+     *
      * @param url
      * @param headers
      * @param mediaType
@@ -222,18 +255,19 @@ public class HttpUtils {
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-               return response.body().bytes();
+                return response.body().bytes();
             } else {
-                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]",url, response.code(), response.message(), response.body());
+                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]", url, response.code(), response.message(), response.body());
             }
         } catch (IOException e) {
             log.error("do post error, url={}", url, e);
         }
         return null;
     }
-    
+
     /**
      * 执行post请求
+     *
      * @param url
      * @param headers
      * @param mediaType
@@ -252,19 +286,20 @@ public class HttpUtils {
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-               return response.body().string();
+                return response.body().string();
             } else {
-                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]",url, response.code(), response.message(), response.body());
+                log.warn("访问 {} 失败，返回: code:{} msg: {}, body:[]", url, response.code(), response.message(), response.body());
             }
         } catch (IOException e) {
             log.error("do post error, url={}", url, e);
         }
         return null;
     }
-    
-    
+
+
     /**
      * put上传文件
+     *
      * @param url
      * @param headers
      * @param file
@@ -287,9 +322,10 @@ public class HttpUtils {
         }
         return null;
     }
-    
+
     /**
      * put上传文件
+     *
      * @param url
      * @param headers
      * @param file
