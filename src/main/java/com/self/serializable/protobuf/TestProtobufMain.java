@@ -12,7 +12,7 @@ public class TestProtobufMain {
     public static void main(String[] args) {
         //序列化
         Article.ArticlePackage serializableArticlePackage = Article.ArticlePackage.newBuilder().setId(1).setTitle("test").build();
-        System.out.println(serializableArticlePackage.toByteArray().length);
+        System.out.println(serializableArticlePackage.getSerializedSize());
 
         try {
             //将序列化后的内容存放到文件
