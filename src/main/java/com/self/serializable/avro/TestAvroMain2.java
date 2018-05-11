@@ -8,12 +8,13 @@ import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
 import org.apache.avro.io.DatumWriter;
-import org.apache.avro.io.EncoderFactory;
-import org.apache.avro.io.JsonEncoder;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +43,6 @@ public class TestAvroMain2 {
 
         //反序列化
         deserializeAvroFromFile(schema, "avro2.avro");
-
-        JsonEncoder jsonEncoder = EncoderFactory.get().jsonEncoder(schema, new ObjectOutputStream(new ByteArrayOutputStream()), true);
     }
 
     /**
