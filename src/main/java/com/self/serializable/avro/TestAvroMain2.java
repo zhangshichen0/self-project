@@ -83,6 +83,7 @@ public class TestAvroMain2 {
         File file = new File(fileName);
         DatumReader<GenericRecord> userDatumReader = new SpecificDatumReader<>(schema);
         DataFileReader<GenericRecord> dataFileReader = new DataFileReader<>(file, userDatumReader);
+        //System.out.println(dataFileReader.getSchema().toString(true)); 可以从数据文件中获取schema
         GenericRecord user = null;
         System.out.println("----------------deserializeAvroFromFile-------------------");
         while (dataFileReader.hasNext()) {
