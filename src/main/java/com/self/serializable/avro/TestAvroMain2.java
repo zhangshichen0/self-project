@@ -55,8 +55,15 @@ public class TestAvroMain2 {
      */
     public static void serializeAvroToFile(List<GenericRecord> list, Schema schema, String fileName) throws IOException {
         DatumWriter<GenericRecord> userDatumWriter = new SpecificDatumWriter<>(schema);
+        /*
+        按照json编码，json格式解码与之相对应
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        for(int i = 0; i < list.size(); i ++) {
+            userDatumWriter.write(list.get(i), EncoderFactory.get().jsonEncoder(schema, byteArrayOutputStream, false));
+        }
+        System.out.println(new String(byteArrayOutputStream.toByteArray(), "UTF-8"));
+        */
         DataFileWriter<GenericRecord> dataFileWriter = new DataFileWriter<>(userDatumWriter);
-
         File diskFile = new File(fileName);
         long length = diskFile.length();
 
