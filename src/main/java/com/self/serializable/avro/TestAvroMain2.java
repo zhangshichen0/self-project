@@ -8,13 +8,12 @@ import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
 import org.apache.avro.io.DatumWriter;
+import org.apache.avro.io.EncoderFactory;
+import org.apache.avro.io.JsonEncoder;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +42,8 @@ public class TestAvroMain2 {
 
         //反序列化
         deserializeAvroFromFile(schema, "avro2.avro");
+
+        JsonEncoder jsonEncoder = EncoderFactory.get().jsonEncoder(schema, new ObjectOutputStream(new ByteArrayOutputStream()), true);
     }
 
     /**
@@ -55,7 +56,17 @@ public class TestAvroMain2 {
     public static void serializeAvroToFile(List<GenericRecord> list, Schema schema, String fileName) throws IOException {
         DatumWriter<GenericRecord> userDatumWriter = new SpecificDatumWriter<>(schema);
         DataFileWriter<GenericRecord> dataFileWriter = new DataFileWriter<>(userDatumWriter);
-        dataFileWriter.create(schema, new File(fileName));
+
+        File diskFile = new File(fileName);
+        long length = diskFile.length();
+
+        if (length == 0) {
+            //如果是新文件，则插入Schema
+            dataFileWriter.create(schema, diskFile);
+        } else {
+            //对于现有文件，则直接追加到文件的尾部
+            dataFileWriter.appendTo(diskFile);
+        }
         for (GenericRecord user : list) {
             dataFileWriter.append(user);
         }
