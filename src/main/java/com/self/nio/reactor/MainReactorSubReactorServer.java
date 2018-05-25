@@ -81,9 +81,7 @@ public class MainReactorSubReactorServer implements Runnable {
                 if (null != socketChannel) {
                     SubReactor subReactor = subReactors[next];
                     subReactor.add(socketChannel);
-                    if (++next >= subSelector.length) {
-                        next = 0;
-                    }
+                    next = (next + 1) % subReactors.length;
 
                 }
             } catch (IOException e) {
