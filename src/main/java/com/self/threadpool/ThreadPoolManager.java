@@ -48,11 +48,11 @@ public class ThreadPoolManager implements ThreadPool {
     private static Lock lock = new ReentrantLock();
 
 
-    private ThreadPoolManager () {
+    private ThreadPoolManager() {
         this(5, new LinkedBlockingQueue<>(10));
     }
 
-    private ThreadPoolManager (int coreThreadNum2, BlockingQueue<Runnable> blockingQueue) {
+    private ThreadPoolManager(int coreThreadNum2, BlockingQueue<Runnable> blockingQueue) {
         if (coreThreadNum2 > 0) {
             coreThreadNum = coreThreadNum2;
         }
@@ -60,7 +60,7 @@ public class ThreadPoolManager implements ThreadPool {
         workers = new Worker[coreThreadNum];
 
         //初始化线程池
-        for (int i = 0; i < coreThreadNum; i ++) {
+        for (int i = 0; i < coreThreadNum; i++) {
             workers[i] = new Worker();
             workers[i].setName("Thread-worker" + threadNum.incrementAndGet());
             System.out.println("初始化线程数" + (i + 1) + "/" + coreThreadNum + ",当前线程的名字为：" + workers[i].getName());
@@ -93,13 +93,10 @@ public class ThreadPoolManager implements ThreadPool {
         if (null == task) {
             throw new NullPointerException("任务为空");
         }
-        synchronized (taskQueue) {
-            try {
-                taskQueue.put(task);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            taskQueue.notifyAll();
+        try {
+            taskQueue.put(task);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -113,16 +110,13 @@ public class ThreadPoolManager implements ThreadPool {
         if (null == tasks || tasks.length == 0) {
             throw new NullPointerException("任务为空");
         }
-        synchronized (taskQueue) {
-            Arrays.stream(tasks).forEach(task -> {
-                try {
-                    taskQueue.put(task);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-            taskQueue.notifyAll();
-        }
+        Arrays.stream(tasks).forEach(task -> {
+            try {
+                taskQueue.put(task);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**
@@ -135,16 +129,13 @@ public class ThreadPoolManager implements ThreadPool {
         if (null == taskList || taskList.size() == 0) {
             throw new NullPointerException("任务为空");
         }
-        synchronized (taskQueue) {
-            taskList.forEach(task -> {
-                try {
-                    taskQueue.put(task);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-            taskQueue.notifyAll();
-        }
+        taskList.forEach(task -> {
+            try {
+                taskQueue.put(task);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**
@@ -190,7 +181,7 @@ public class ThreadPoolManager implements ThreadPool {
             }
         }
 
-        for (int i = 0; i < workers.length; i ++) {
+        for (int i = 0; i < workers.length; i++) {
             workers[i].stopWork();
             workers[i] = null;
         }
@@ -207,29 +198,20 @@ public class ThreadPoolManager implements ThreadPool {
         public void run() {
             Runnable task = null;
             while (isRunning) {
-                synchronized (taskQueue) {
-                    while (isRunning && taskQueue.isEmpty()) {
-                        try {
-                            taskQueue.wait(20);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
 
-                    if (!taskQueue.isEmpty()) {
-                        try {
-                            task = taskQueue.take();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                if (!taskQueue.isEmpty()) {
+                    try {
+                        task = taskQueue.take();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-
-                    if (null != task) {
-                        task.run();
-                    }
-                    executeTaskNum ++;
-                    task = null;
                 }
+
+                if (null != task) {
+                    task.run();
+                }
+                executeTaskNum++;
+                task = null;
             }
         }
 
