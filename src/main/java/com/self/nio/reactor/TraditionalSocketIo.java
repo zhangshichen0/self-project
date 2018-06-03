@@ -35,8 +35,13 @@ public class TraditionalSocketIo {
 
         @Override
         public void run() {
-            while (!Thread.interrupted()) {
-                new Thread(new Handler(serverSocket)).start();
+            try {
+                while (!Thread.interrupted()) {
+                    Socket socket = serverSocket.accept();
+                    new Thread(new Handler(socket)).start();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -44,16 +49,15 @@ public class TraditionalSocketIo {
 
     class Handler implements Runnable {
 
-        private ServerSocket serverSocket;
+        private Socket socket;
 
-        public Handler(ServerSocket serverSocket) {
-            this.serverSocket = serverSocket;
+        public Handler(Socket socket) {
+            this.socket = socket;
         }
 
         @Override
         public void run() {
             try {
-                Socket socket = serverSocket.accept();
                 if (null != socket) {
                     byte[] input = new byte[1024];
                     socket.getInputStream().read(input);
