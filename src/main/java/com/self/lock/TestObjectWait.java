@@ -7,7 +7,7 @@ package com.self.lock;
  * @create 2018/6/10
  * @desc
  */
-public class TestWait {
+public class TestObjectWait {
 
     private Object lock = new Object();
 
@@ -30,7 +30,7 @@ public class TestWait {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        TestWait testWait = new TestWait();
+        TestObjectWait testWait = new TestObjectWait();
 
         Thread thread = new Thread(new Runnable() {
             @Override
