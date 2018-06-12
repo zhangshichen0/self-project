@@ -7,6 +7,7 @@ import com.self.litejob.listener.ElasticJobListener;
 import com.self.litejob.registry.JobRegistry;
 import com.self.litejob.scheduler.JobScheduleController;
 import com.self.litejob.scheduler.JobShutdownHookPlugin;
+import com.self.litejob.scheduler.SchedulerFacade;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
@@ -26,6 +27,7 @@ public final class JobScheduler {
 
     private final LiteJobConfiguration liteJobConfiguration;
     private final JobFacade jobFacade;
+    private final SchedulerFacade schedulerFacade;
 
     /**
      * 创建任务调度
@@ -37,7 +39,7 @@ public final class JobScheduler {
         List<ElasticJobListener> elasticJobListenerList = Arrays.asList(elasticJobListeners);
         this.liteJobConfiguration = liteJobConfiguration;
         jobFacade = new LiteJobFacade(elasticJobListenerList);
-
+        schedulerFacade = new SchedulerFacade();
     }
 
     public void init() {
@@ -54,6 +56,7 @@ public final class JobScheduler {
             Properties properties = getProperties();
             stdSchedulerFactory.initialize(properties);
             scheduler = stdSchedulerFactory.getScheduler();
+            scheduler.getListenerManager().addTriggerListener(schedulerFacade.createJobListener());
         } catch (SchedulerException e) {
             e.printStackTrace();
         }

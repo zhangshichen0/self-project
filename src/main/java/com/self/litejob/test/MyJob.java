@@ -26,5 +26,11 @@ public class MyJob implements DataflowJob<String> {
     public void processData(List<String> data) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("process data" + data + "    " + simpleDateFormat.format(new Date()));
+        try {
+            //任务执行超过10秒，则会触发任务错过listener
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
