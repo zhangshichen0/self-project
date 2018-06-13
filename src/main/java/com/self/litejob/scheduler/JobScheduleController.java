@@ -33,6 +33,10 @@ public final class JobScheduleController {
         }
     }
 
+    /**
+     * 修改了调度时间后，重新设置cron，并重启任务
+     * @param cron
+     */
     public synchronized void rescheduleJob(final String cron) {
         try {
             CronTrigger cronTrigger = (CronTrigger)scheduler.getTrigger(TriggerKey.triggerKey(triggerIdentity));
