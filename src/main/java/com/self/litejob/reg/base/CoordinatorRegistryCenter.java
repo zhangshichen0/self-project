@@ -1,4 +1,4 @@
-package com.self.litejob.reg;
+package com.self.litejob.reg.base;
 
 import java.util.List;
 

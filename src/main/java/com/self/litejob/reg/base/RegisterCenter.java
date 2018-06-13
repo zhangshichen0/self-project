@@ -1,4 +1,4 @@
-package com.self.litejob.reg;
+package com.self.litejob.reg.base;
 
 /**
  * 定义注册中心基础操作接口
@@ -61,7 +61,7 @@ public interface RegisterCenter {
      * 获取注册中心当前时间
      * @return
      */
-    long getRegistryCenterTime();
+    long getRegistryCenterTime(final String key);
 
     /**
      * 获取注册中心原生客户端
