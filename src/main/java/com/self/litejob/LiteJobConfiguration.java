@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  */
 @AllArgsConstructor
 @Getter
-public class LiteJobConfiguration implements JobRootConfiguration{
+public final class LiteJobConfiguration implements JobRootConfiguration{
 
     private JobTypeConfiguration jobTypeConfiguration;
 
