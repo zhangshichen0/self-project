@@ -1,6 +1,8 @@
 package com.self.litejob.registry;
 
 import com.self.litejob.LiteJobConfiguration;
+import com.self.litejob.core.JobInstance;
+import com.self.litejob.reg.base.CoordinatorRegistryCenter;
 import com.self.litejob.scheduler.JobScheduleController;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,8 @@ public final class JobRegistry {
 
     private ConcurrentHashMap<String, LiteJobConfiguration> configMap = new ConcurrentHashMap();
     private ConcurrentHashMap<String, JobScheduleController> schedulerControllerMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, JobInstance> jobInstanceMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, CoordinatorRegistryCenter> regCenterMap = new ConcurrentHashMap<>();
 
     /**
      * 单例模式
@@ -42,6 +46,20 @@ public final class JobRegistry {
         return instance;
     }
 
+    /**
+     * 添加作业调度控制器.
+     *
+     * @param jobName 作业名称
+     * @param jobScheduleController 作业调度控制器
+     * @param regCenter 注册中心
+     */
+    public void registerJob(final String jobName, final JobScheduleController jobScheduleController, final CoordinatorRegistryCenter regCenter) {
+        schedulerControllerMap.put(jobName, jobScheduleController);
+        regCenterMap.put(jobName, regCenter);
+        //添加cache的路径
+        regCenter.addCacheData("/" + jobName);
+    }
+
 
     public void addConfiguration(LiteJobConfiguration liteJobConfiguration) {
         configMap.put(liteJobConfiguration.getJobName(), liteJobConfiguration);
@@ -51,7 +69,11 @@ public final class JobRegistry {
         return configMap.get(jobName);
     }
 
-    public void addSchedulerController(String jobName, JobScheduleController jobScheduleController) {
-        schedulerControllerMap.put(jobName, jobScheduleController);
+    public void addJobInstance(String jobName, JobInstance jobInstance) {
+        jobInstanceMap.put(jobName, jobInstance);
+    }
+
+    public JobInstance getJobInstance(String jobName) {
+        return jobInstanceMap.get(jobName);
     }
 }

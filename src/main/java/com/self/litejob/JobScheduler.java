@@ -1,9 +1,11 @@
 package com.self.litejob;
 
+import com.self.litejob.core.JobInstance;
 import com.self.litejob.executor.JobFacade;
 import com.self.litejob.executor.LiteJobFacade;
 import com.self.litejob.job.LiteJob;
 import com.self.litejob.listener.ElasticJobListener;
+import com.self.litejob.reg.base.CoordinatorRegistryCenter;
 import com.self.litejob.registry.JobRegistry;
 import com.self.litejob.scheduler.JobScheduleController;
 import com.self.litejob.scheduler.JobShutdownHookPlugin;
@@ -28,24 +30,28 @@ public final class JobScheduler {
     private final LiteJobConfiguration liteJobConfiguration;
     private final JobFacade jobFacade;
     private final SchedulerFacade schedulerFacade;
+    private final CoordinatorRegistryCenter registryCenter;
 
     /**
      * 创建任务调度
      * @param liteJobConfiguration
      * @param elasticJobListeners
      */
-    public JobScheduler(final LiteJobConfiguration liteJobConfiguration, final ElasticJobListener... elasticJobListeners) {
+    public JobScheduler(final LiteJobConfiguration liteJobConfiguration, final CoordinatorRegistryCenter registryCenter, final ElasticJobListener... elasticJobListeners) {
         JobRegistry.getInstance().addConfiguration(liteJobConfiguration);
+        JobRegistry.getInstance().addJobInstance(liteJobConfiguration.getJobName(), new JobInstance());
         List<ElasticJobListener> elasticJobListenerList = Arrays.asList(elasticJobListeners);
         this.liteJobConfiguration = liteJobConfiguration;
         jobFacade = new LiteJobFacade(elasticJobListenerList);
-        schedulerFacade = new SchedulerFacade();
+        schedulerFacade = new SchedulerFacade(registryCenter, liteJobConfiguration.getJobName());
+        this.registryCenter = registryCenter;
     }
 
     public void init() {
         JobScheduleController jobScheduleController = new JobScheduleController(createScheduler(), createJobDetail(liteJobConfiguration.getJobClass()), liteJobConfiguration.getJobName());
-        JobRegistry.getInstance().addSchedulerController(liteJobConfiguration.getJobName(), jobScheduleController);
+        JobRegistry.getInstance().registerJob(liteJobConfiguration.getJobName(), jobScheduleController, registryCenter);
         jobScheduleController.scheduleJob(liteJobConfiguration.getJobTypeConfiguration().getJobCoreConfiguration().getCron());
+        schedulerFacade.registerStartUpInfo();
     }
 
 
