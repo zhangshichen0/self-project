@@ -30,7 +30,8 @@ public class JavaSerializationConverter extends AbstractHttpMessageConverter<Ser
         // 使用Serializable，这里可以直接返回true
         // 使用object，这里还要加上Serializable接口实现类判断
         // 根据自己的业务需求加上其他判断
-        return true;
+        //只有实现了Serializable的接口才能使用
+        return Serializable.class.isAssignableFrom(clazz);
     }
 
     @Override
