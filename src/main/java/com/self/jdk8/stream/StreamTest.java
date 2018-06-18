@@ -3,6 +3,7 @@ package com.self.jdk8.stream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author shichen
@@ -18,7 +19,7 @@ public class StreamTest {
         }
 
         StreamTest.reduce(list);
-
+        StreamTest.parallelStream(list);
     }
 
     /**
@@ -26,9 +27,20 @@ public class StreamTest {
      * reduce操作
      * @param list
      */
-    public static void reduce(List<String> list) {
+    private static void reduce(List<String> list) {
         Optional<String> optionalS = list.stream().reduce(((s, s2) -> s + "#" + s2));
         System.out.println(optionalS.get());
+    }
+
+    /**
+     * 并行处理流【不一定快】
+     *
+     * @param list
+     */
+    private static void parallelStream(List<String> list) {
+        long start = System.currentTimeMillis();
+        list.parallelStream().filter(s -> Integer.parseInt(s) % 2 == 0).map(Integer::parseInt).collect(Collectors.toList());
+        System.out.println((System.currentTimeMillis() - start));
     }
 
 }
