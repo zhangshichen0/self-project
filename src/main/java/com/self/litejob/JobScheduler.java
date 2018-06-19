@@ -47,6 +47,8 @@ public final class JobScheduler {
     }
 
     public void init() {
+        //更新zk中的config信息
+        schedulerFacade.updateLiteJobConfig(liteJobConfiguration);
         JobScheduleController jobScheduleController = new JobScheduleController(createScheduler(), createJobDetail(liteJobConfiguration.getJobClass()), liteJobConfiguration.getJobName());
         JobRegistry.getInstance().registerJob(liteJobConfiguration.getJobName(), jobScheduleController, registryCenter);
         jobScheduleController.scheduleJob(liteJobConfiguration.getJobTypeConfiguration().getJobCoreConfiguration().getCron());

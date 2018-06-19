@@ -24,9 +24,9 @@ public class TestJobScheduler {
         zkRegisterCenter.init();
 
         LiteJobConfiguration liteJobConfiguration =
-                LiteJobConfiguration.build().jobTypeConfiguration(new DataflowJobConfiguration(
+                LiteJobConfiguration.newBuilder().jobTypeConfiguration(new DataflowJobConfiguration(
                         JobCoreConfiguration.newBuilder().buildCron("*/10 * * * * ?").buildJobName(MyJob.class.getSimpleName()).build(), MyJob.class.getCanonicalName()))
-                        .build();
+                        .overwrite(true).build();
 
         JobScheduler jobScheduler = new JobScheduler(liteJobConfiguration, zkRegisterCenter);
         jobScheduler.init();

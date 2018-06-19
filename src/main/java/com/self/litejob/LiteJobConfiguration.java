@@ -4,6 +4,7 @@ import com.self.litejob.config.JobTypeConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author shichen
@@ -15,6 +16,11 @@ import lombok.NoArgsConstructor;
 public final class LiteJobConfiguration implements JobRootConfiguration{
 
     private JobTypeConfiguration jobTypeConfiguration;
+
+    /**
+     * 是否覆盖zk中已存在的配置
+     */
+    private boolean overwrite;
 
     public String getJobName() {
         return jobTypeConfiguration.getJobCoreConfiguration().getJobName();
@@ -29,7 +35,7 @@ public final class LiteJobConfiguration implements JobRootConfiguration{
     }
 
 
-    public static Builder build() {
+    public static Builder newBuilder() {
         return new Builder();
     }
 
@@ -37,13 +43,20 @@ public final class LiteJobConfiguration implements JobRootConfiguration{
     public static class Builder {
         private JobTypeConfiguration jobTypeConfiguration;
 
+        private boolean overwrite;
+
         public Builder jobTypeConfiguration(JobTypeConfiguration jobTypeConfiguration) {
             this.jobTypeConfiguration = jobTypeConfiguration;
             return this;
         }
 
+        public Builder overwrite(boolean overwrite) {
+            this.overwrite = overwrite;
+            return this;
+        }
+
         public final LiteJobConfiguration build() {
-            return new LiteJobConfiguration(jobTypeConfiguration);
+            return new LiteJobConfiguration(jobTypeConfiguration, overwrite);
         }
     }
 }
