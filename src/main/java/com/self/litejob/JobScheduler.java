@@ -38,7 +38,6 @@ public final class JobScheduler {
      * @param elasticJobListeners
      */
     public JobScheduler(final LiteJobConfiguration liteJobConfiguration, final CoordinatorRegistryCenter registryCenter, final ElasticJobListener... elasticJobListeners) {
-        JobRegistry.getInstance().addConfiguration(liteJobConfiguration);
         JobRegistry.getInstance().addJobInstance(liteJobConfiguration.getJobName(), new JobInstance());
         List<ElasticJobListener> elasticJobListenerList = Arrays.asList(elasticJobListeners);
         this.liteJobConfiguration = liteJobConfiguration;

@@ -1,6 +1,5 @@
 package com.self.litejob.registry;
 
-import com.self.litejob.LiteJobConfiguration;
 import com.self.litejob.core.JobInstance;
 import com.self.litejob.reg.base.CoordinatorRegistryCenter;
 import com.self.litejob.scheduler.JobScheduleController;
@@ -24,7 +23,6 @@ public final class JobRegistry {
      */
     private static volatile JobRegistry instance;
 
-    private ConcurrentHashMap<String, LiteJobConfiguration> configMap = new ConcurrentHashMap();
     private ConcurrentHashMap<String, JobScheduleController> schedulerControllerMap = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, JobInstance> jobInstanceMap = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, CoordinatorRegistryCenter> regCenterMap = new ConcurrentHashMap<>();
@@ -58,15 +56,6 @@ public final class JobRegistry {
         regCenterMap.put(jobName, regCenter);
         //添加cache的路径
         regCenter.addCacheData("/" + jobName);
-    }
-
-
-    public void addConfiguration(LiteJobConfiguration liteJobConfiguration) {
-        configMap.put(liteJobConfiguration.getJobName(), liteJobConfiguration);
-    }
-
-    public LiteJobConfiguration getConfiguration(String jobName) {
-        return configMap.get(jobName);
     }
 
     public void addJobInstance(String jobName, JobInstance jobInstance) {
