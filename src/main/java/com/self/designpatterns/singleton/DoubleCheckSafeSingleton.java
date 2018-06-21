@@ -36,7 +36,7 @@ public class DoubleCheckSafeSingleton {
         if (Objects.isNull(instance)) {
             //静态方法时类属性，所以使用类锁
             synchronized (DoubleCheckSafeSingleton.class) {
-                //第二次验证
+                //第二次验证，当多个线程同时通过第一次验证，则会等待拿到锁的线程执行完后，获取锁，进入到代码，所以需要第二次验证
                 if (Objects.isNull(instance)) {
                     instance = new DoubleCheckSafeSingleton();
                 }
