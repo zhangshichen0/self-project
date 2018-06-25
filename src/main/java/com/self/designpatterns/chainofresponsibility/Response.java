@@ -1,9 +1,6 @@
 package com.self.designpatterns.chainofresponsibility;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @author shichen
@@ -11,6 +8,7 @@ import lombok.ToString;
  * @desc
  */
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
