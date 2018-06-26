@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.stream.IntStream.range;
+
 /**
  * @author shichen
  * @create 2018/6/18
@@ -20,6 +22,12 @@ public class StreamTest {
 
         StreamTest.reduce(list);
         StreamTest.parallelStream(list);
+
+
+        //生成1--9 * 2 的列表
+        int[] a = range(1, 10).map(i -> i * 2).toArray();
+        List<Integer> result = range(1, 10).map(i -> i * 2).boxed().collect(Collectors.toList());
+        System.out.println(result);
     }
 
     /**
