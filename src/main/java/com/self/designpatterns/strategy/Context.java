@@ -1,5 +1,7 @@
 package com.self.designpatterns.strategy;
 
+import java.util.Objects;
+
 /**
  * @author shichen
  * @create 2018/6/26
@@ -17,7 +19,9 @@ public class Context {
      * 利用算法写业务逻辑
      */
     public void doSomeThing() {
-        this.strategy.behavior();
+        if (Objects.nonNull(this.strategy)) {
+            this.strategy.behavior();
+        }
     }
 
     /**
