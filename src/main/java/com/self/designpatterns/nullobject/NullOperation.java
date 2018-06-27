@@ -5,5 +5,12 @@ package com.self.designpatterns.nullobject;
  * @create 2018/6/27
  * @desc
  */
-public class NullOperation {
+public class NullOperation extends AbstractOperation {
+    /**
+     * 操作
+     */
+    @Override
+    public void request() {
+        System.out.println("do nothing");
+    }
 }
