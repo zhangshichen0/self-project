@@ -9,3 +9,9 @@
 
 例子：
     冲咖啡和冲茶--》步骤：烧水(boilWater)，泡(brew)，倒入到杯子中(pourInCup)，加入调味品(addCondiments)
+
+jdk中使用模板方法例子：
+    java.util.Collections#sort()
+    java.io.InputStream#skip()
+    java.io.InputStream#read()
+    java.util.AbstractList#indexOf()
