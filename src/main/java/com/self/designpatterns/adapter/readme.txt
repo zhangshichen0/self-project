@@ -17,3 +17,5 @@
 
 使用案例：
     springMVC的HandlerAdapter，用来适配不同的Controller
+    java.util.Arrays#asList()
+    java.util.Collections#list()
