@@ -12,6 +12,8 @@
     proxy文件加下代理
     java.lang.reflect.Proxy
     RMI
+    RPC
+    等都是代理模式的代表
 
 动态代理实现的两种方式：
     jdk自带：只能对接口进行代理
