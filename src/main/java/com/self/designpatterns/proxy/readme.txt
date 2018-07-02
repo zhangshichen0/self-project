@@ -1,4 +1,4 @@
-代理模式
+代理模式：应用最广泛的一种模式 https://blog.csdn.net/jiankunking/article/details/52143504
 
 作用：
     控制其他对象的方式，相当于在调用对象前，增加一层挡板
