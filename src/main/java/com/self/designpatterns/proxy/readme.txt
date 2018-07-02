@@ -10,6 +10,8 @@
 例子：
     spring aop即是动态代理的典型
     proxy文件加下代理
+    java.lang.reflect.Proxy
+    RMI
 
 动态代理实现的两种方式：
     jdk自带：只能对接口进行代理
