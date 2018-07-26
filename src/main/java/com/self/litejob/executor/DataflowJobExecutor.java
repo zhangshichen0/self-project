@@ -1,7 +1,6 @@
 package com.self.litejob.executor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class DataflowJobExecutor extends AbstractJobExecutor {
 
     private void oneOffExecute() {
         List<Object> dataList = this.fetchData();
-        if (CollectionUtils.isNotEmpty(dataList)) {
+        if (!dataList.isEmpty()) {
             processData(dataList);
         }
     }

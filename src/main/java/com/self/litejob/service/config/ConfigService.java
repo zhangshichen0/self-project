@@ -2,10 +2,10 @@ package com.self.litejob.service.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import com.self.litejob.LiteJobConfiguration;
 import com.self.litejob.reg.base.CoordinatorRegistryCenter;
 import com.self.litejob.storage.JobDataStorage;
-import joptsimple.internal.Strings;
 
 /**
  * @author shichen
