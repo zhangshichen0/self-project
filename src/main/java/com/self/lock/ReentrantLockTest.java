@@ -1,6 +1,5 @@
 package com.self.lock;
 
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -17,39 +16,33 @@ public class ReentrantLockTest {
             @Override
             public void run() {
                 try {
-                    if(lock.tryLock(10, TimeUnit.SECONDS)) {
-                       System.out.println("获取锁成功 " + Thread.currentThread().getId());
-                       Thread.sleep(1000);
-                       lock.unlock();
-                    } else {
-                        System.out.println("获取所失败 " + Thread.currentThread().getId());
-                    }
+                    lock.lock();
+                    System.out.println("获取锁成功 " + Thread.currentThread().getName());
+                    Thread.sleep(100000);
+                    lock.unlock();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
             }
-        });
+        }, "1");
 
         Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    if(lock.tryLock(10, TimeUnit.SECONDS)) {
-                        System.out.println("获取锁成功 " + Thread.currentThread().getId());
-                        Thread.sleep(1000);
-                        lock.unlock();
-                    } else {
-                        System.out.println("获取所失败 " + Thread.currentThread().getId());
-                    }
+                    lock.lock();
+                    System.out.println("获取锁成功 " + Thread.currentThread().getName());
+                    Thread.sleep(100000);
+                    lock.unlock();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
             }
-        });
+        }, "2");
 
         thread1.start();
         thread2.start();
