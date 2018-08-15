@@ -16,10 +16,14 @@ public class TestThreadInterrupt {
         interruptThread.interrupt();
 
         Thread.currentThread().interrupt();
+        System.out.println("main:" + Thread.currentThread().getName() + "是否停止4？ = " + Thread.currentThread().isInterrupted());
         System.out.println("main:" + Thread.currentThread().getName() + "是否停止1？ = " + Thread.interrupted());
         System.out.println("main:" + Thread.currentThread().getName() + "是否停止2？ = " + Thread.interrupted());
-        System.out.println(interruptThread.getName() + "是否停止3？ = " + interruptThread.isInterrupted());
-        System.out.println(interruptThread.getName() + "是否停止4？ = " + interruptThread.isInterrupted());
+        System.out.println("main:" + Thread.currentThread().getName() + "是否停止3？ = " + Thread.interrupted());
+
+
+        System.out.println(interruptThread.getName() + "是否停止7？ = " + interruptThread.isInterrupted());
+        System.out.println(interruptThread.getName() + "是否停止8？ = " + interruptThread.isInterrupted());
     }
 
 }
