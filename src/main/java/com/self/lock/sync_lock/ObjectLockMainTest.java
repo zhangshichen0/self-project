@@ -38,6 +38,9 @@ public class ObjectLockMainTest {
 
     }
 
+    /**
+     * 对应本类实例对象监视器
+     */
     public synchronized void lock3() {
         System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁");
         try {
@@ -49,6 +52,9 @@ public class ObjectLockMainTest {
 
     }
 
+    /**
+     * 对应本类实例对象监视器
+     */
     public synchronized void lock4() {
         System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁");
         try {
@@ -93,9 +99,9 @@ public class ObjectLockMainTest {
         }, "4");
 
         thread1.start();
-        thread2.start();
+        //thread2.start();
         thread3.start();
-        thread4.start();
+        //thread4.start();
     }
 
 }
