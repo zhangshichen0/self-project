@@ -1,5 +1,8 @@
 package com.self.lock.sync_lock;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author shichen
  * @create 2018/8/16
@@ -13,8 +16,9 @@ public class ClassAndObjectLockMainTest {
      * 类锁
      */
     public static void classLock() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         synchronized (ClassAndObjectLockMainTest.class) {
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁");
+            System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁,获得锁时间:" + sdf.format(new Date()));
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
@@ -24,8 +28,9 @@ public class ClassAndObjectLockMainTest {
     }
 
     public void objectLock() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         synchronized (lock) {
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁");
+            System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁,获得锁时间:" + sdf.format(new Date()));
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
