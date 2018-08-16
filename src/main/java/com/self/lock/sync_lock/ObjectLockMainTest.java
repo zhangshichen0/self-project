@@ -12,10 +12,15 @@ public class ObjectLockMainTest {
         synchronized (lock) {
             System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁");
             try {
+
+                synchronized (lock) {
+                    System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁");
+                }
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println("当前线程：" + Thread.currentThread().getName() + "执行完成");
         }
     }
 
@@ -27,7 +32,10 @@ public class ObjectLockMainTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println("当前线程：" + Thread.currentThread().getName() + "执行完成");
+
         }
+
     }
 
     public synchronized void lock3() {
@@ -37,6 +45,19 @@ public class ObjectLockMainTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("当前线程：" + Thread.currentThread().getName() + "执行完成");
+
+    }
+
+    public synchronized void lock4() {
+        System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("当前线程：" + Thread.currentThread().getName() + "执行完成");
+
     }
 
     public static void main(String[] args) {
@@ -64,9 +85,17 @@ public class ObjectLockMainTest {
             }
         }, "3");
 
+        Thread thread4 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                objectLockMainTest.lock4();
+            }
+        }, "4");
+
         thread1.start();
         thread2.start();
         thread3.start();
+        thread4.start();
     }
 
 }
