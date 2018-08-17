@@ -1,4 +1,4 @@
-package com.self.lock;
+package com.self.lock.sync_lock;
 
 /**
  * 验证synchronized的wait逻辑
