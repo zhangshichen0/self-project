@@ -65,6 +65,7 @@ public class ConditionMainTest {
 
         thread1.start();
 
+        //主线程休眠1s中，确保线程1先获得锁
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
