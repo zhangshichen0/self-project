@@ -7,6 +7,11 @@ package com.self.lock.sync_lock;
  */
 public class ObjectLockMainTest {
 
+    /**
+     * 对象锁：
+     * 使用同一个对象加锁的产生锁竞争，每个对象都有一个monitor，使用monitor的变化，进行锁的竞争
+     */
+
     private final Object lock = new Object();
     public void lock1() {
         synchronized (lock) {

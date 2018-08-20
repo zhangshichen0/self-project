@@ -7,6 +7,12 @@ package com.self.lock.sync_lock;
  */
 public class ClassLockMainTest {
 
+    /**
+     * 类锁
+     *
+     * 类方法存在类锁竞争
+     */
+
     public static void lock1() {
         synchronized (ClassLockMainTest.class) {
             System.out.println("当前线程：" + Thread.currentThread().getName() + "获得锁");

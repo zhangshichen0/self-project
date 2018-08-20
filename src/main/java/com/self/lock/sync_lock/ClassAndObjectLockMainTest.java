@@ -10,6 +10,12 @@ import java.util.Date;
  */
 public class ClassAndObjectLockMainTest {
 
+
+    /**
+     * 对象锁和类锁
+     * 两个互不影响的锁，类锁是对访问类方法访问互斥，对象锁是对引用同一对象加锁的对象方法互斥
+     */
+
     private final Object lock = new Object();
 
     /**
