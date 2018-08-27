@@ -46,6 +46,7 @@ public class ConditionMainTest {
             //将在condition链表中第一个node移到锁链表中，但不唤醒
             System.out.println("线程：" + Thread.currentThread().getName() + "获得锁");
             condition.signal();
+            //signal后，lock2方法继续运行  直到调用unlock方法释放锁，lock1在通过在锁链表中获取锁，再次从await处运行
             Thread.sleep(10000);
         } catch (Exception e) {
             e.printStackTrace();
