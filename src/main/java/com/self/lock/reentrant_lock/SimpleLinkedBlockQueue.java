@@ -167,6 +167,7 @@ public class SimpleLinkedBlockQueue<E> {
     }
 
     private void signalNotEmpty() {
+        //必须先获取condition相关的锁之后，才能进行signal操作
         final ReentrantLock notEmptyLock = this.takeLock;
         notEmptyLock.lock();
         try {
@@ -180,6 +181,7 @@ public class SimpleLinkedBlockQueue<E> {
     }
 
     private void signalNotFull() {
+        //必须先获取condition相关的锁之后，才能进行signal操作
         final ReentrantLock putLock = this.putLock;
         putLock.lock();
         try {
