@@ -5,6 +5,10 @@ import java.util.concurrent.CountDownLatch;
 /**
  * boss等待员工进行开会
  *
+ * 一个或者一组线程等待另一组线程
+ *
+ * CyclicBarrier是线程之间互相等待，且可以重置
+ *
  * @author shichen
  * @create 2018/8/27
  * @desc
