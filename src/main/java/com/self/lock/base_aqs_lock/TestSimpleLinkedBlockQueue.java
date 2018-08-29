@@ -1,4 +1,4 @@
-package com.self.lock.reentrant_lock;
+package com.self.lock.base_aqs_lock;
 
 /**
  * @author shichen
