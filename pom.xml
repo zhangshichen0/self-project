@@ -88,11 +88,11 @@
             <version>1.8.2</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-tools</artifactId>
             <version>1.8.2</version>
-        </dependency>
+        </dependency>-->
 
         <!-- avro end -->
 
@@ -178,6 +178,14 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- 增加切面jar依赖 -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.13</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
