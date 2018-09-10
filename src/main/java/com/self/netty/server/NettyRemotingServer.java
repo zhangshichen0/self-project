@@ -61,6 +61,7 @@ public class NettyRemotingServer {
                     protected void initChannel(SocketChannel channel) throws Exception {
                         ChannelPipeline pipeline = channel.pipeline();
                         pipeline.addLast(new NettyDecoder(),
+                                new NettyConnectHandler(),
                                 new NettyMessageHandler());
                     }
                 });
