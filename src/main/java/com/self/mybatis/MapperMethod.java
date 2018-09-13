@@ -1,5 +1,7 @@
 package com.self.mybatis;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.lang.reflect.Method;
 
 /**
@@ -17,9 +19,9 @@ public class MapperMethod {
         this.mapperInterface = mapperInterface;
     }
 
-    public Object execute() {
+    public Object execute(Object[] args) {
         Object result;
-        System.out.println("executor " + mapperInterface.getName() + "." + this.method.getName() + " success");
+        System.out.println("executor " + mapperInterface.getName() + "." + this.method.getName() + ", params " + JSONObject.toJSON(args) + " execute success");
         result = "success";
         return result;
     }

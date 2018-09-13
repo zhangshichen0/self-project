@@ -38,7 +38,7 @@ public class MapperProxy<T> implements InvocationHandler {
             throw new RuntimeException("not exist for this method: " + method.getName());
         }
 
-        return mapperMethod.execute();
+        return mapperMethod.execute(args);
     }
 
     /**
