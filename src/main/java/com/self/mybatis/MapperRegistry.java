@@ -11,6 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MapperRegistry {
 
+    /**
+     * 存放每个接口对应的生成代理类工厂对象
+     */
     private Map<Class<?>, MapperProxyFactory<?>> mapperProxyFactoryMap = new ConcurrentHashMap<>();
 
     /**
@@ -41,7 +44,13 @@ public class MapperRegistry {
         }
     }
 
-
+    /**
+     * 缓存下是否已经生成接口的代理工厂生成类
+     *
+     * @param tClass
+     * @param <T>
+     * @return
+     */
     private <T> boolean hasMapper(Class<T> tClass) {
         return mapperProxyFactoryMap.containsKey(tClass);
     }
