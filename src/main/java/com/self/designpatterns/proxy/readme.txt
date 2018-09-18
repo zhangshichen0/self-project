@@ -21,3 +21,7 @@
 
 代理：
 是使用统一的方式对所有要增加同一功能的方法逻辑上增加增强，使用动态代理，会在jvm中动态生成代理类
+
+使用cglib或者jdk自带proxy生成代理类并输出文件：
+System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:\\class");  --该设置用于输出cglib动态代理产生的类
+System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");   --该设置用于输出jdk动态代理产生的类
