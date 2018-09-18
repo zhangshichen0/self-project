@@ -15,7 +15,7 @@ public class TestMain {
         HelloService helloService = new HelloServiceImpl();
         Handler handler = new Handler(helloService);
 
-        HelloService proxy = (HelloService) Proxy.newProxyInstance(TestMain.class.getClassLoader(), new Class[]{HelloService.class}, handler);
+        HelloService proxy = (HelloService) Proxy.newProxyInstance(TestMain.class.getClassLoader(), new Class[]{HelloService.class, HelloServiceA.class}, handler);
         proxy.say();
     }
 
