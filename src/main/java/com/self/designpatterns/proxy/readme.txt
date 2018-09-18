@@ -25,3 +25,7 @@
 使用cglib或者jdk自带proxy生成代理类并输出文件：
 System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:\\class");  --该设置用于输出cglib动态代理产生的类
 System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");   --该设置用于输出jdk动态代理产生的类
+
+
+spring aop原理解析：
+https://blog.csdn.net/u012469740/article/details/61328542
