@@ -1,4 +1,4 @@
-package com.self.designpatterns.proxy;
+package com.self.designpatterns.proxy.cglib;
 
 /**
  * @author shichen

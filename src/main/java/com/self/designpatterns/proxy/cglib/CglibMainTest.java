@@ -1,4 +1,4 @@
-package com.self.designpatterns.proxy;
+package com.self.designpatterns.proxy.cglib;
 
 import org.springframework.cglib.core.DebuggingClassWriter;
 import org.springframework.cglib.proxy.Enhancer;

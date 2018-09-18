@@ -1,4 +1,4 @@
-package com.self.designpatterns.proxy;
+package com.self.designpatterns.proxy.cglib;
 
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
