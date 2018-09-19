@@ -9,4 +9,6 @@ public interface HelloService {
 
     void say();
 
+    void hello();
+
 }
