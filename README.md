@@ -35,7 +35,7 @@
     * 现在java日志体系都是基于slf4j进行构建,slf4j提供了日志的统一接口，可以对接不同的日志实现，如logback，log4j，jul，log4j2等，[各个框架之间的关系](https://fdx321.github.io/2015/12/20/%E7%BB%88%E4%BA%8E%E6%90%9E%E6%B8%85%E6%A5%9AJava%E7%9A%84%E6%97%A5%E5%BF%97%E4%BA%86/)
     * [各个框架之间如何切换](https://my.oschina.net/pingpangkuangmo/blog/410224?fromerr=OUHSuJjF)
     
-* **mybatis**
+* **[mybatis](http://www.mybatis.org/mybatis-3/zh/index.html)**
     * 仿照mybatis简单实现对dao接口生成代理类功能，具体就是动态代理的应用
     
 * **netty**
