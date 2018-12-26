@@ -1,0 +1,6 @@
+#### 本片结构仿照netty实现网络通信，采用Reactor线程模型实现
+* MiniNioEventLoopGroup用于初始化负责管理连接的子线程，即MiniNioEventLoop，并负责为SocketChannel选择不同的MiniNioEventLoop
+* MiniNioEventLoop用于管理已经连接的客户端，进行客户端的事件处理
+* MiniServerBootstrap负责启动服务端，用于接受客户端连接
+* MiniNettyMainTest服务端测试类
+* MiniNettyClientMainTest客户端测试类
