@@ -1,2 +1,5 @@
 针对class的加载，通过学习classloader的源码，理解classloader加载机制
 深度分析Java的ClassLoader机制（源码级别）：http://www.hollischuang.com/archives/199
+
+
+Text和MyTest类用于测试类的加载和实例化过程，static修饰变量只加载一次，实例变量每创建一个实例初始化一次
