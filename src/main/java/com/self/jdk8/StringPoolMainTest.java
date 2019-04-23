@@ -1,6 +1,8 @@
 package com.self.jdk8;
 
 /**
+ * 字符串常量池在jdk8中默认存在于堆中
+ *
  * @author shichen
  * @create 2019-04-23
  * @desc
