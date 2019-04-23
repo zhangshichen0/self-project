@@ -52,14 +52,20 @@ public class MyTest extends Test {
     }
 
     public static void main(String[] args) {
-        System.out.println(Test.x);
+        System.out.println(Test.b);
         MyTest test3 = new MyTest("Mian");
     }
 }
 
 class Test {
 
-    public static final int x = 1;
+    public static int b = 1;
+
+    public static final int c = 2;
+
+    static {
+        System.out.println("父类静态代码块");
+    }
 
     {
         System.out.println("父类普通代码块");
