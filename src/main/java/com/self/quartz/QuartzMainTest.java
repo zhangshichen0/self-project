@@ -4,6 +4,8 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
 /**
+ * 单机版
+ *
  * @author shichen
  * @create 2019-04-26
  * @desc
