@@ -12,24 +12,29 @@ import org.quartz.impl.StdSchedulerFactory;
  */
 public class QuartzMainTest {
 
+    private static final String JOB_BEAN = "job";
+
     public static void main(String[] args) {
         //创建jobDetail1
-        JobDetail jobDetail1 = getJobDetail("cronJob1");
+        JobDetail jobDetail1 = getJobDetail(PrintCurrentTimeJob.class);
         //创建Trigger 每日的9点40触发任务
-        CronTrigger cronTrigger1 = getCronTrigger("0/10 * * * * ? ", "cronJob1");
+        CronTrigger cronTrigger1 = getCronTrigger("0/10 * * * * ? ", PrintCurrentTimeJob.class.getSimpleName());
 
         //创建jobDetail2
-        JobDetail jobDetail2 = getJobDetail("cronJob2");
+        JobDetail jobDetail2 = getJobDetail(LongRunTimeJob.class);
         //创建Trigger 每日的9点40触发任务
-        CronTrigger cronTrigger2 = getCronTrigger("0/5 * * * * ? ", "cronJob2");
+        CronTrigger cronTrigger2 = getCronTrigger("0/5 * * * * ? ", LongRunTimeJob.class.getSimpleName());
 
 
         //创建调度容器
         StdSchedulerFactory stdSchedulerFactory = new StdSchedulerFactory();
         try {
             Scheduler scheduler = stdSchedulerFactory.getScheduler();
+            //增加监控器
+            scheduler.getListenerManager().addTriggerListener(new JobTriggerListener());
+
             //增加调度任务
-            scheduler.scheduleJob(jobDetail1, cronTrigger1);
+            //scheduler.scheduleJob(jobDetail1, cronTrigger1);
             scheduler.scheduleJob(jobDetail2, cronTrigger2);
             //开始调度
             scheduler.start();
@@ -39,13 +44,16 @@ public class QuartzMainTest {
 
     }
 
-    public static JobDetail getJobDetail(String jobName) {
+    public static JobDetail getJobDetail(Class<? extends IJob> clazz) {
         //创建jobDetail
-        JobKey jobKey = new JobKey(jobName);
+        JobKey jobKey = new JobKey(clazz.getSimpleName());
         JobDetail jobDetail = JobBuilder.newJob(JobBean.class).withIdentity(jobKey).build();
         //可以使用此方式设置Job实现类中的参数
-        jobDetail.getJobDataMap().put("param1", "1");
-        jobDetail.getJobDataMap().put("param2", "2");
+        try {
+            jobDetail.getJobDataMap().put(JOB_BEAN, clazz.newInstance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return jobDetail;
     }
 
