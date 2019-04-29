@@ -32,6 +32,28 @@ public class QuartzMainTest {
             Scheduler scheduler = stdSchedulerFactory.getScheduler();
             //增加监控器
             scheduler.getListenerManager().addTriggerListener(new JobTriggerListener());
+            scheduler.getListenerManager().addSchedulerListener(new JobSchedulerListener());
+            scheduler.getListenerManager().addJobListener(new JobListener() {
+                @Override
+                public String getName() {
+                    return "aaaaaaa";
+                }
+
+                @Override
+                public void jobToBeExecuted(JobExecutionContext context) {
+                    System.out.println("jobToBeExecuted:" + context.getJobDetail().getKey().getName());
+                }
+
+                @Override
+                public void jobExecutionVetoed(JobExecutionContext context) {
+                    System.out.println("jobExecutionVetoed:" + context.getJobDetail().getKey().getName());
+                }
+
+                @Override
+                public void jobWasExecuted(JobExecutionContext context, JobExecutionException jobException) {
+                    System.out.println("jobWasExecuted:" + context.getJobDetail().getKey().getName());
+                }
+            });
 
             //增加调度任务
             //scheduler.scheduleJob(jobDetail1, cronTrigger1);
