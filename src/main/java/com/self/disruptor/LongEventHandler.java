@@ -11,6 +11,6 @@ public class LongEventHandler implements EventHandler<LongEvent> {
 
     @Override
     public void onEvent(LongEvent longEvent, long l, boolean b) throws Exception {
-        System.out.println("event:" + longEvent);
+        System.out.println("event:" + longEvent + ", next sequence " + l + ", boolean " + b);
     }
 }
