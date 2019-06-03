@@ -12,6 +12,10 @@ public class LongEvent {
         this.value = value;
     }
 
+    public long get() {
+        return this.value;
+    }
+
     @Override
     public String toString() {
         return "LongEvent{" +
