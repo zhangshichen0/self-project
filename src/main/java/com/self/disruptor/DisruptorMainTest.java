@@ -33,7 +33,8 @@ public class DisruptorMainTest {
         }, ProducerType.SINGLE, new YieldingWaitStrategy());
         disruptor.setDefaultExceptionHandler(new IgnoreExceptionHandler());
 
-        disruptor.handleEventsWith(new LongEventHandler());
+        //多个处理器处理事件
+        disruptor.handleEventsWith(new LongEventHandler(), new LongEventHandler());
 //        disruptor.handleEventsWith(new MyEventHandler()).then(new MyEventHandler());  //Pipeline
         RingBuffer<LongEvent> ringBuffer = disruptor.start();
 
