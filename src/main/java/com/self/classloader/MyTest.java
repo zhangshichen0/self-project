@@ -25,6 +25,8 @@ public class MyTest extends Test {
         System.out.println("静态代码块1");
     }
 
+    public static Testa testa = new Testa();
+
     public static MyTest test1 = new MyTest("test1");
     public static MyTest test2 = new MyTest("test2");
     public static int n = count("非静态");
@@ -71,4 +73,10 @@ class Test {
         System.out.println("父类普通代码块");
     }
 
+}
+
+class Testa {
+    static {
+        System.out.println("Testa被加载");
+    }
 }
