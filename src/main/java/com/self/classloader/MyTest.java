@@ -1,5 +1,8 @@
 package com.self.classloader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 在运行一个Java程序时，分为类加载过程和实例化过程，即static修饰的代码块、属性、声明为类加载，类的普通属性、代码块、
  * 构造器为实例化过程。其中类加载的代码属于整个类，只执行一次；而实例化过程中的代码属于实例化对象的，每次实例化过程都执行。
@@ -56,6 +59,15 @@ public class MyTest extends Test {
     public static void main(String[] args) {
         System.out.println(Test.b);
         MyTest test3 = new MyTest("Mian");
+
+
+        //下面lambda表达式会生成invokedynamic字节码，用于支持动态类型语言
+        List<Integer> a = new ArrayList<>();
+        for (int i = 0; i < 10; i ++) {
+            a.add(i);
+        }
+
+        a.stream().filter(i-> i%2 == 0).forEach(i -> System.out.println(i));
     }
 }
 
