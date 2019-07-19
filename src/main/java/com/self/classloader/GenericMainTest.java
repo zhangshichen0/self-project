@@ -1,5 +1,6 @@
 package com.self.classloader;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +78,19 @@ public class GenericMainTest {
         userList.add(new User(1, "1"));
         userList.add(new User(2, "2"));
 
+        try {
+            //成功放上，说明编译后进行了类型擦除
+            userList.getClass().getMethod("add", Object.class).invoke(userList, "xxxxx");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
         for (int i = 0; i < userList.size(); i++) {
+            //使用反射添加的元素，在这里通过checkcast检查失败
             User user = userList.get(i);
             System.out.println(user);
         }
