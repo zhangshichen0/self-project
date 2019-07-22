@@ -23,6 +23,9 @@ public class ServiceBootstrap {
     public static <S> Iterator<S> loadAll(Class<S> clazz) {
         ServiceLoader<S> loader = ServiceLoader.load(clazz);
 
+        //serviceLoader是启动类加载器加载
+        System.out.println(loader.getClass().getClassLoader());
+
         return loader.iterator();
     }
 
