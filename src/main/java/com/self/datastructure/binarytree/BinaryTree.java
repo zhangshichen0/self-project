@@ -11,11 +11,8 @@ public class BinaryTree {
 
     private BinaryTreeNode rootNode;
 
-    private int high;
 
     public BinaryTree() {
-        this.rootNode = null;
-        this.high = 0;
     }
 
     public void insert(int num) {
@@ -23,29 +20,9 @@ public class BinaryTree {
 
         if (Objects.isNull(this.rootNode)) {
             this.rootNode = binaryTreeNode;
-            this.high = 1;
 
             System.out.println("root " + num);
             return;
-        }
-
-        if (this.high == 1) {
-            if (this.rootNode.getKey() > num) {
-                binaryTreeNode.setParentNode(this.rootNode);
-                this.high = this.high + 1;
-                this.rootNode.setLeftNode(binaryTreeNode);
-                System.out.println("parent node :"+ this.rootNode.getKey() +" left node" + num);
-                return;
-            } else if (this.rootNode.getKey() < num) {
-                binaryTreeNode.setParentNode(this.rootNode);
-                this.high = this.high + 1;
-                this.rootNode.setRightNode(binaryTreeNode);
-                System.out.println("parent node :"+ this.rootNode.getKey() +" right node" + num);
-
-                return;
-            } else {
-                return;
-            }
         }
 
         BinaryTreeNode leftNode = this.rootNode.getLeftNode();
@@ -81,10 +58,6 @@ public class BinaryTree {
                         rightNode = parentNode.getRightNode();
                         continue;
                     }
-                }
-
-                if (Objects.isNull(leftNode) && Objects.isNull(rightNode)) {
-                    this.high = this.high + 1;
                 }
             } else if (Objects.nonNull(leftNode) && Objects.nonNull(rightNode)) {
                 if (parentNode.getKey() > num) {
