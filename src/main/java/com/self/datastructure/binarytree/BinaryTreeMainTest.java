@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * 将一系列数据组装为二叉搜索树
+ *
  * @author shichen
  * @create 2019-08-08
  * @desc
