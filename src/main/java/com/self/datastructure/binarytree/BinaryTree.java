@@ -89,14 +89,21 @@ public class BinaryTree {
         BinaryTreeNode leftNode = parentNode.getLeftNode();
         BinaryTreeNode rightNode = parentNode.getRightNode();
         for (;;) {
+
+            if (Objects.isNull(parentNode)) {
+                return -1;
+            }
+
             if (parentNode.getKey() == key) {
                 return 1;
             }
 
-            if (parentNode.getKey() > key) {
+            if (parentNode.getKey() > key && Objects.nonNull(leftNode)) {
                 parentNode = leftNode;
-            } else {
+            } else if (parentNode.getKey() < key && Objects.nonNull(rightNode)) {
                 parentNode = rightNode;
+            } else {
+                return -1;
             }
             leftNode = parentNode.getLeftNode();
             rightNode = parentNode.getRightNode();
