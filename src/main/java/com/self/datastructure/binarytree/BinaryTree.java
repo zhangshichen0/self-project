@@ -58,6 +58,8 @@ public class BinaryTree {
                         rightNode = parentNode.getRightNode();
                         continue;
                     }
+                } else {
+                    break;
                 }
             } else if (Objects.nonNull(leftNode) && Objects.nonNull(rightNode)) {
                 if (parentNode.getKey() > num) {
@@ -70,5 +72,32 @@ public class BinaryTree {
             }
         }
 
+    }
+
+    /**
+     * 查找
+     * @param key
+     * @return
+     */
+    public int search(int key) {
+        if (Objects.isNull(this.rootNode)) {
+            return -1;
+        }
+        BinaryTreeNode parentNode = this.rootNode;
+        BinaryTreeNode leftNode = parentNode.getLeftNode();
+        BinaryTreeNode rightNode = parentNode.getRightNode();
+        for (;;) {
+            if (parentNode.getKey() == key) {
+                return 1;
+            }
+
+            if (parentNode.getKey() > key) {
+                parentNode = leftNode;
+            } else {
+                parentNode = rightNode;
+            }
+            leftNode = parentNode.getLeftNode();
+            rightNode = parentNode.getRightNode();
+        }
     }
 }
