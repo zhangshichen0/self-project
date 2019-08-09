@@ -26,6 +26,8 @@ public class BinaryTreeMainTest {
             }
         }
 
+        list.add(47);
+
         System.out.println(list);
 
         BinaryTree binaryTree = new BinaryTree();
@@ -33,6 +35,7 @@ public class BinaryTreeMainTest {
             binaryTree.insert(list.get(i));
         }
 
+        System.out.println(binaryTree.search(47));
 
     }
 }

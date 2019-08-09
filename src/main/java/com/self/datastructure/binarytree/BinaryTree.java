@@ -64,8 +64,10 @@ public class BinaryTree {
             } else if (Objects.nonNull(leftNode) && Objects.nonNull(rightNode)) {
                 if (parentNode.getKey() > num) {
                     parentNode = leftNode;
-                } else {
+                } else if (parentNode.getKey() < num){
                     parentNode = rightNode;
+                } else {
+                    break;
                 }
                 leftNode = parentNode.getLeftNode();
                 rightNode = parentNode.getRightNode();
