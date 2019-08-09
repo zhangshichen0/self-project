@@ -1,4 +1,4 @@
-package com.self.datastructure.binarytree;
+package com.self.datastructure.binarysearchtree;
 
 import java.util.Objects;
 

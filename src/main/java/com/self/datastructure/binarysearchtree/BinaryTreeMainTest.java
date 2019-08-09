@@ -1,4 +1,4 @@
-package com.self.datastructure.binarytree;
+package com.self.datastructure.binarysearchtree;
 
 import com.google.common.collect.Lists;
 
