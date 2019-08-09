@@ -18,9 +18,9 @@ public class BinaryTreeMainTest {
 
         //构建一个数组
         List<Integer> list = Lists.newArrayListWithCapacity(10);
-        for (int i = 0; i < 20; i ++) {
+        for (int i = 0; i < 5; i ++) {
             Random r = new Random();
-            int num = r.nextInt(50);
+            int num = r.nextInt(10);
             if (!list.contains(num)) {
                 list.add(num);
             }
@@ -36,6 +36,8 @@ public class BinaryTreeMainTest {
         }
 
         System.out.println(binaryTree.search(47));
+
+        binaryTree.recursivePreOrderTraversal();
 
     }
 }

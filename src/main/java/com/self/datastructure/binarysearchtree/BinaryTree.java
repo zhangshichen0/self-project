@@ -109,4 +109,21 @@ public class BinaryTree {
             rightNode = parentNode.getRightNode();
         }
     }
+
+    /**
+     * 前序遍历
+     */
+    public void recursivePreOrderTraversal() {
+        recursivePreOrderTraversal(this.rootNode);
+    }
+
+    public void recursivePreOrderTraversal(BinaryTreeNode rootNode) {
+        if (Objects.isNull(rootNode)) {
+            return;
+        }
+        System.out.println(rootNode.getKey());
+
+        this.recursivePreOrderTraversal(rootNode.getLeftNode());
+        this.recursivePreOrderTraversal(rootNode.getRightNode());
+    }
 }
