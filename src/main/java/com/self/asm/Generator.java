@@ -1,4 +1,4 @@
-package com.self.aop;
+package com.self.asm;
 
 
 import org.objectweb.asm.ClassReader;
@@ -16,7 +16,7 @@ import java.io.FileOutputStream;
 public class Generator {
 
     public static void main(String[] args) throws Exception {
-        ClassReader classReader = new ClassReader("com/self/aop/Base");
+        ClassReader classReader = new ClassReader("com/self/asm/Base");
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
         ClassVisitor classVisitor = new MyClassVisitor(classWriter);
@@ -24,7 +24,7 @@ public class Generator {
 
         byte[] data = classWriter.toByteArray();
 
-        File file = new File("/Users/shichen/program/worker/self-project/target/classes/com/self/aop/Base.class");
+        File file = new File("/Users/shichen/program/worker/self-project/target/classes/com/self/asm/Base.class");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         fileOutputStream.write(data);
         fileOutputStream.close();

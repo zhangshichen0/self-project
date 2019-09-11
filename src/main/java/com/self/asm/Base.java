@@ -1,4 +1,4 @@
-package com.self.aop;
+package com.self.asm;
 
 /**
  * @author shichen
