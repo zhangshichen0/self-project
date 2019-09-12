@@ -27,7 +27,6 @@ public class AgentMain {
 
         for (Class clazz : classes) {
             try {
-                System.out.println(clazz.getName());
                 if (clazz.getName().startsWith("com.self.attach")) {
                     inst.retransformClasses(clazz);
                 }
@@ -51,7 +50,6 @@ public class AgentMain {
 
         for (Class clazz : classes) {
             try {
-                System.out.println(clazz.getName());
                 if (clazz.getName().startsWith("com.self.attach")) {
                     inst.retransformClasses(clazz);
                 }
