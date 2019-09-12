@@ -1,0 +1,8 @@
+{"namespace": "com.self.serializable.avro",
+ "type": "record",
+ "name": "Article",
+ "fields": [
+     {"name": "id", "type": "int"},
+     {"name": "title",  "type": "string"}
+ ]
+}
