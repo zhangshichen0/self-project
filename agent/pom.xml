@@ -52,11 +52,14 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <!-- 指定jar包的名称 -->
+                    <finalName>agent-1.0</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <outputDirectory>pkg/javaagent/lib</outputDirectory>
+                    <!-- 指定jar包的生成目录 -->
+                    <outputDirectory>/Users/shichen</outputDirectory>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
