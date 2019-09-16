@@ -1,0 +1,2 @@
+该测试是为了实现java agent,agent实现为agent模块，利用attach技术将agent包传递到相应的java进程，实现简单的字节码修改，
+java开源项目arthas，Tprofile等agent项目即依赖此技术实现
