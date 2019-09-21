@@ -85,6 +85,9 @@ class Test {
         System.out.println("父类普通代码块");
     }
 
+    public Test() {
+        System.out.println("父类构造函数");
+    }
 }
 
 class Testa {
