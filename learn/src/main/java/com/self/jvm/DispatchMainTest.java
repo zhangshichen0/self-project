@@ -24,9 +24,11 @@ public class DispatchMainTest {
 
         Human man = new Man();
         Human woman = new Woman();
+        Human child = new Child();
 
         man.sayHello();
         woman.sayHello();
+        child.sayHello();
 
         //静态分派即使用重载--在编译器即可确定调用的方法
         //注释掉方法sayHi(char)后，编译后字节码文件直接调用的sayHi(int)方法
@@ -51,7 +53,16 @@ public class DispatchMainTest {
 
         @Override
         public void sayHello() {
+            //当是Child实例调用时，打印出的是Son实例
+            System.out.println(this);
             System.out.println("woman");
+        }
+    }
+
+    static class Child extends Woman {
+        @Override
+        public void sayHello() {
+            super.sayHello();
         }
     }
 
