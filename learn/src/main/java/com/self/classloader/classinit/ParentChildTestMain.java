@@ -10,12 +10,17 @@ package com.self.classloader.classinit;
 public class ParentChildTestMain {
 
     public static void main(String[] args) {
-        Child child = new Child();
+        //Child child = new Child();
+
+        //此种情况下只会加载父类
+        System.out.println(Child.m);
     }
 
 }
 
 class Parent {
+    protected static int m = 1;
+
     static {
         System.out.println("parent init");
     }
