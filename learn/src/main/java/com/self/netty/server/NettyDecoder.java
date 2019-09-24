@@ -16,6 +16,6 @@ public class NettyDecoder extends StringDecoder {
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out) throws Exception {
         super.decode(ctx, msg, out);
-        System.out.println(out.toString());
+        //System.out.println(out.toString());
     }
 }

@@ -9,7 +9,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -46,6 +46,19 @@ public class NettyRemotingServer {
             }
         });
 
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(1000), new ThreadFactory() {
+            private AtomicInteger incId = new AtomicInteger();
+            @Override
+            public Thread newThread(Runnable r) {
+                Thread thread = new Thread(r);
+                thread.setName("bussiness-process-" + incId.incrementAndGet());
+                thread.setDaemon(true);
+                return thread;
+            }
+        }, (r, executor) -> r.run());
+        threadPoolExecutor.prestartAllCoreThreads();
+
         serverBootstrap.group(bossEventLoopGroup, workerEventLoopGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 1024)
@@ -64,7 +77,7 @@ public class NettyRemotingServer {
                         pipeline.addLast(new NettyDecoder(),
                                 new StringEncoder(),
                                 new NettyConnectHandler(),
-                                new NettyMessageHandler());
+                                new NettyMessageHandler(threadPoolExecutor));
                     }
                 });
 

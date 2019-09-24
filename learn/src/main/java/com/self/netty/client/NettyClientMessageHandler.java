@@ -16,9 +16,10 @@ public class NettyClientMessageHandler extends SimpleChannelInboundHandler<Strin
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        System.out.println("receive server msg :" + msg);
+
         if (count.getAndIncrement() < 10) {
             ctx.writeAndFlush("hello server, i am client " + count.getAndIncrement());
         }
-        System.out.println("receive server msg :" + msg);
     }
 }
