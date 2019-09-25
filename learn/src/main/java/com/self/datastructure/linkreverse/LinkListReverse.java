@@ -19,7 +19,7 @@ public class LinkListReverse {
         //组装一个链表
         Node header = new Node();
         Node tail = null;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             Node node = new Node(i);
             if (Objects.isNull(header.next)) {
                 header.next = node;
@@ -34,13 +34,14 @@ public class LinkListReverse {
         Node currentNode = header.next;
         header.next = null;
         Node q = null, nextNode;
-        while (Objects.nonNull(currentNode)) {
+        while (true) {
             nextNode = currentNode.next;
-            if (Objects.isNull(nextNode)) {
-                header.next = currentNode;
-            }
             currentNode.next = q;
 
+            if (Objects.isNull(nextNode)) {
+                header.next = currentNode;
+                break;
+            }
             q = currentNode;
             currentNode = nextNode;
 
