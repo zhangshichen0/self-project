@@ -3,6 +3,11 @@ package com.self.datastructure.linkreverse;
 import java.util.Objects;
 
 /**
+ * 定义三个节点
+ * currentNode为当前节点
+ * q节点为临时节点
+ * nextNode为当前节点的下一个节点
+ *
  * @author shichen
  * @create 2019-09-25
  * @desc
