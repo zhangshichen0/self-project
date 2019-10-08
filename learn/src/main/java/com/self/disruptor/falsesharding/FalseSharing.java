@@ -6,8 +6,10 @@ package com.self.disruptor.falsesharding;
  * @desc
  */
 public class FalseSharing implements Runnable{
-    // change
-    public static int NUM_THREADS = 8;
+    /**
+     * 此处修改为cpu核数，能看出缓存伪共享的性能区别
+     */
+    public static int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     public final static long ITERATIONS = 500L * 1000L * 1000L;
     private final int arrayIndex;
     private static VolatileLong[] longs;
@@ -17,8 +19,8 @@ public class FalseSharing implements Runnable{
     }
 
     public static void main(final String[] args) throws Exception {
-        Thread.sleep(10000);
-        System.out.println("starting....");
+        Thread.sleep(1000);
+        System.out.println("starting...." + NUM_THREADS);
         if (args.length == 1) {
             NUM_THREADS = Integer.parseInt(args[0]);
         }
