@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!-- 开启spring对事务的注解支持 -->
+    <!--<tx:annotation-driven/>-->
+    <aop:aspectj-autoproxy expose-proxy="true"  proxy-target-class="true"/>
+
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.self.spring"/>
+
+
+    <task:executor id="asynExecutor" pool-size="10-1000" queue-capacity="10" keep-alive="10" rejection-policy="CALLER_RUNS"/>
+    <task:annotation-driven executor="asynExecutor"/>
 
 </beans>
