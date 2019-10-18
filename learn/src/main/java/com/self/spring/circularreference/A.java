@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 public class A implements AA {;
 
 
+    /**
+     * 用lazy修饰后，在注入属性时，注入的是一个代理对象，并没有真实对象
+     */
     @Lazy
     @Autowired
     private BB bb;
@@ -22,6 +25,9 @@ public class A implements AA {;
     @Override
     public void a() {
         System.out.println("A.a");
+
+        //用Lazy修饰后，bb在使用时原生对象被初始化
+        bb.b();
     }
 
 }
