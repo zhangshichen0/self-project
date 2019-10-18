@@ -17,6 +17,9 @@ public class SpringTestMain {
         System.out.println(a.getClass());
         a.a();
 
+        BB b = (BB)applicationContext.getBean("b");
+        System.out.println(b.getClass());
+
     }
 
 }
