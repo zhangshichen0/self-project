@@ -20,6 +20,11 @@ public class SpringTestMain {
         BB b = (BB)applicationContext.getBean("b");
         System.out.println(b.getClass());
 
+
+        CC c = (CC)applicationContext.getBean("c");
+        System.out.println(c.getClass());
+        c.cc();
+
     }
 
 }

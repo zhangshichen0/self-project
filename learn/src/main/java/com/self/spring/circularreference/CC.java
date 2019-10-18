@@ -2,12 +2,11 @@ package com.self.spring.circularreference;
 
 /**
  * @author shichen
- * @create 2019-10-17
+ * @create 2019-10-18
  * @desc
  */
-public interface BB {
+public interface CC {
 
-    public void b();
+    void cc();
 
-    void c();
 }
