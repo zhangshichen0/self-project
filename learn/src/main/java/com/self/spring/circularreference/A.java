@@ -25,9 +25,14 @@ public class A implements AA {;
     @Override
     public void a() {
         System.out.println("A.a");
-
+        System.out.println(bb);
         //用Lazy修饰后，bb在使用时原生对象被初始化
+        System.out.println("A" + Thread.currentThread().getName());
         bb.b();
+
+        bb.c();
+
+        System.out.println(bb);
     }
 
 }
