@@ -1,5 +1,9 @@
-package com.self.spring.circularreference;
+package com.self.spring;
 
+import com.self.spring.circularreference.AA;
+import com.self.spring.circularreference.BB;
+import com.self.spring.circularreference.CC;
+import com.self.spring.listener.HelloEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -24,6 +28,10 @@ public class SpringTestMain {
         CC c = (CC)applicationContext.getBean("c");
         System.out.println(c.getClass());
         c.cc();
+
+
+        //发布事件
+        applicationContext.publishEvent(new HelloEvent(new Object()));
 
     }
 
