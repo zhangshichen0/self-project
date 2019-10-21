@@ -1,7 +1,9 @@
 package com.self.spring.circularreference;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
  * @desc
  */
 @Service
+@PropertySource("classpath:spring/application.properties")
 public class A implements AA {;
 
 
@@ -20,6 +23,9 @@ public class A implements AA {;
     @Lazy
     @Autowired
     private BB bb;
+
+    @Value("${a}")
+    private String a;
 
     @Async
     @Override
@@ -33,6 +39,8 @@ public class A implements AA {;
         bb.c();
 
         System.out.println(bb);
+
+        System.out.println("value a=" + a);
     }
 
 }
