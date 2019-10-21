@@ -15,10 +15,9 @@ public class SimpleProxyInterceptor implements MethodInterceptor, Ordered {
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         System.out.println("执行SimpleProxy");
+        long startTime = System.currentTimeMillis();
         Object result = invocation.proceed();
-
-        System.out.println("执行结果" + result);
-
+        System.out.println("方法" + invocation.getMethod().getName() + "，执行结果" + result + ",耗费时间：" + (System.currentTimeMillis() - startTime) + "ms");
         return result;
     }
 
