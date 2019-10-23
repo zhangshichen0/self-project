@@ -15,7 +15,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringTestMain {
 
     public static void main(String[] args) {
-
+        //该设置用于输出jdk动态代理产生的类
+        //System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-main.xml");
         AA a = (AA)applicationContext.getBean("a");
         System.out.println(a.getClass());

@@ -28,7 +28,7 @@ public class ConfigTaskExecutor implements BeanFactoryAware {
     public SimpleApplicationEventMulticaster newSimpleApplicationEventMulticaster() {
         SimpleApplicationEventMulticaster simpleApplicationEventMulticaster = new SimpleApplicationEventMulticaster(this.beanFactory);
         simpleApplicationEventMulticaster.setTaskExecutor(this.taskExecutor);
-        simpleApplicationEventMulticaster.setErrorHandler(t -> System.out.println(t));
+        simpleApplicationEventMulticaster.setErrorHandler(t -> t.printStackTrace());
         return simpleApplicationEventMulticaster;
     }
 
