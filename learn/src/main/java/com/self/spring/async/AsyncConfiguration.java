@@ -14,7 +14,6 @@ import java.util.concurrent.Executor;
  * @create 2019-10-24
  * @desc
  */
-@EnableAsync
 @Configuration
 public class AsyncConfiguration implements AsyncConfigurer {
 

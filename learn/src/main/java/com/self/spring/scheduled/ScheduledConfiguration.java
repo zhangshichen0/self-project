@@ -2,7 +2,6 @@ package com.self.spring.scheduled;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
@@ -18,7 +17,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @desc
  */
 @Configuration
-@EnableScheduling
 public class ScheduledConfiguration implements SchedulingConfigurer {
 
     /**
