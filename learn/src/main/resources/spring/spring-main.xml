@@ -13,8 +13,4 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.self.spring"/>
 
-
-    <task:executor id="asynExecutor" pool-size="10-1000" queue-capacity="10" keep-alive="10" rejection-policy="CALLER_RUNS"/>
-    <task:annotation-driven executor="asynExecutor"/>
-
 </beans>
