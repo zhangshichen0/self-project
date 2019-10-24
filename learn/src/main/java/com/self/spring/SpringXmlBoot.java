@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @create 2019-10-17
  * @desc
  */
-public class SpringTestMain {
+public class SpringXmlBoot {
 
     public static void main(String[] args) {
         //该设置用于输出jdk动态代理产生的类
