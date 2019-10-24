@@ -4,6 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
@@ -21,7 +22,10 @@ public class ConfigTaskExecutor implements BeanFactoryAware {
 
     private BeanFactory beanFactory;
 
-    @Autowired
+    /**
+     * 将执行listener的异步执行线程和执行异步的任务合并 使用{@link com.self.spring.async.AsyncConfiguration}类初始化的线程池
+     */
+    @Autowired(required = false)
     private TaskExecutor taskExecutor;
 
     @Bean(name = "applicationEventMulticaster")

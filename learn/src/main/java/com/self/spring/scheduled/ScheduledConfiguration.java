@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ScheduledConfiguration implements SchedulingConfigurer {
 
     /**
-     * 定义执行任务的线程池
+     * 定义执行任务的线程池，如果不定义线程池的话，则使用1个线程执行定时任务，会造成后续定时任务延迟
      *
      * @return
      */
