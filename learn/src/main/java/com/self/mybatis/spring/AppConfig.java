@@ -1,5 +1,6 @@
 package com.self.mybatis.spring;
 
+import com.self.mybatis.spring.dao.PlayDao;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -35,5 +36,15 @@ public class AppConfig {
         dataSource.setPassword("Acy!@#qwe123");
         return dataSource;
     }
+
+
+    /**
+     * 使用javaconfig方式产生Dao对象  当dao多时，需要程序员多次定义  复杂  不实用
+     */
+    /*@Bean
+    public PlayDao playDao() throws Exception {
+        SqlSessionFactory sqlSessionFactory = sqlSessionFactory();
+        return sqlSessionFactory.openSession().getMapper(PlayDao.class);
+    }*/
 
 }
