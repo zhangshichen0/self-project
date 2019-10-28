@@ -6,14 +6,12 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
-import org.springframework.stereotype.Component;
 
 /**
  * @author shichen
  * @create 2019-10-28
  * @desc
  */
-@Component
 public class MapperDefinitionConfigurer implements BeanDefinitionRegistryPostProcessor {
 
     @Override

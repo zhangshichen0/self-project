@@ -1,1 +1,4 @@
 通过自定义FactoryBean用来生成bean
+
+
+自定义注解，注解中使用注解@Import(MapperRegistrar.class)初始化我们自定义bean
