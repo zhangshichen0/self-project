@@ -1,5 +1,6 @@
 package com.self.spring.factorybean;
 
+import com.self.spring.factorybean.dao.UserDao;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -10,11 +11,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class TestBoot {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
-        ac.scan("com.self.spring.factorybean");
-        ac.refresh();
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        UserDao userDao = (UserDao)ac.getBean("userDao");
+        UserDao userDao = ac.getBean(UserDao.class);
         userDao.query();
     }
 

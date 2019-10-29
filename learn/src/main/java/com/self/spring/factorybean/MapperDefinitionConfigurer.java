@@ -2,10 +2,10 @@ package com.self.spring.factorybean;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.util.StringUtils;
 
 /**
  * @author shichen
@@ -14,19 +14,29 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
  */
 public class MapperDefinitionConfigurer implements BeanDefinitionRegistryPostProcessor {
 
+    private String basePackage;
+
+    private String suffix;
+
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        GenericBeanDefinition genericBeanDefinition = (GenericBeanDefinition) BeanDefinitionBuilder.genericBeanDefinition(UserDao.class).getBeanDefinition();
+        ClassPathScanner classPathScanner = new ClassPathScanner(registry, false, suffix);
+        classPathScanner.registerFilters();
 
-        String beanClassName = genericBeanDefinition.getBeanClassName();
-        genericBeanDefinition.setBeanClass(ProxyBeanFactoryBean.class);
-        genericBeanDefinition.getConstructorArgumentValues().addGenericArgumentValue(beanClassName);
-
-        registry.registerBeanDefinition("userDao", genericBeanDefinition);
+        //扫描指定包路径，从而生成beanDefinition
+        classPathScanner.scan(StringUtils.tokenizeToStringArray(this.basePackage, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS));
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         //不做处理
+    }
+
+    public void setBasePackage(String basePackage) {
+        this.basePackage = basePackage;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
     }
 }

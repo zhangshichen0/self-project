@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * @desc
  */
 @Configuration
-@Mapper
+@Mapper(basePackage = "com.self.spring.factorybean.dao", suffix = "Dao")
 public class AppConfig {
 }

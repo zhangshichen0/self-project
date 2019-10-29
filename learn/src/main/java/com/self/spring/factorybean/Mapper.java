@@ -1,6 +1,7 @@
 package com.self.spring.factorybean;
 
 import org.springframework.context.annotation.Import;
+import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
@@ -15,6 +16,12 @@ import java.lang.annotation.*;
 @Documented
 public @interface Mapper {
 
+    @AliasFor("basePackage")
     String value() default "";
+
+    @AliasFor("value")
+    String basePackage() default "";
+
+    String suffix() default "";
 
 }

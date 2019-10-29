@@ -23,8 +23,7 @@ public class MapperRegistrar implements ImportBeanDefinitionRegistrar, ResourceL
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-        AnnotationAttributes mapperScanAttrs = AnnotationAttributes
-                .fromMap(importingClassMetadata.getAnnotationAttributes(Mapper.class.getName()));
+        AnnotationAttributes mapperScanAttrs = AnnotationAttributes.fromMap(importingClassMetadata.getAnnotationAttributes(Mapper.class.getName()));
         if (mapperScanAttrs != null) {
             registerBeanDefinitions(mapperScanAttrs, registry, generateBaseBeanName(importingClassMetadata, 0));
         }
@@ -36,6 +35,10 @@ public class MapperRegistrar implements ImportBeanDefinitionRegistrar, ResourceL
 
     private void registerBeanDefinitions(AnnotationAttributes mapperScanAttrs, BeanDefinitionRegistry registry, String name) {
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(MapperDefinitionConfigurer.class);
+
+        //从注解的原信息中获取字段值
+        builder.addPropertyValue("basePackage", mapperScanAttrs.getString("basePackage"));
+        builder.addPropertyValue("suffix", mapperScanAttrs.get("suffix"));
         registry.registerBeanDefinition(name, builder.getBeanDefinition());
 
     }

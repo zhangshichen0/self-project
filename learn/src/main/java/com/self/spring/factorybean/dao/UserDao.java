@@ -1,4 +1,4 @@
-package com.self.spring.factorybean;
+package com.self.spring.factorybean.dao;
 
 /**
  * @author shichen
