@@ -22,10 +22,10 @@ import javax.sql.DataSource;
 public class AppConfig {
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory() throws Exception {
+    public SqlSessionFactoryBean sqlSessionFactory() {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource());
-        return factoryBean.getObject();
+        return factoryBean;
     }
 
     @Bean
