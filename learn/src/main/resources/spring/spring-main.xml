@@ -13,6 +13,16 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.self.spring"/>
 
+
+    <!-- 如果在类上加入@Lazy时，需要增加bean的配置，才能在注入式产生代理对象 -->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+       <property name="customTargetSourceCreators">
+         <list>
+           <bean class="org.springframework.aop.framework.autoproxy.target.LazyInitTargetSourceCreator"/>
+         </list>
+       </property>
+     </bean>
+
     <!-- 开启task -->
     <task:annotation-driven/>
 </beans>
