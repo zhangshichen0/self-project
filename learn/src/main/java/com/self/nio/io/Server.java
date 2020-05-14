@@ -2,9 +2,7 @@ package com.self.nio.io;
 
 import com.google.common.base.Charsets;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,14 +26,22 @@ public class Server {
                     @Override
                     public void run() {
                         try {
-                            byte[] read = new byte[1024];
-
                             OutputStream outputStream = client.getOutputStream();
-                            outputStream.write("xx".getBytes(Charsets.UTF_8));
-                            InputStream inputStream = client.getInputStream();
-                            inputStream.read(read);
 
-                            System.out.println(new String(read));
+                            //向外写数据
+                            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
+                            bufferedWriter.write("xx");
+
+                            //读取网络数据
+                            InputStream inputStream = client.getInputStream();
+                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                            while (true) {
+                                String content = bufferedReader.readLine();
+                                if (content.equals("end")) {
+                                    break;
+                                }
+                                System.out.println(content);
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
