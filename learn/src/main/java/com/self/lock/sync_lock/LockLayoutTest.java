@@ -23,8 +23,9 @@ public class LockLayoutTest {
     public static void main(String[] args) throws InterruptedException, IOException {
         //睡眠5s则，可以看到偏向锁，因为jvm在启动的时候会延迟偏向，所以在未加睡眠的时候，会直接加轻量级锁
         //TimeUnit.SECONDS.sleep(5);
-
-        Thread t1= new Thread(){
+        //调用hashCode后没有偏向锁了
+        a.hashCode();
+        /*Thread t1= new Thread(){
             @Override
             public void run() {
                 synchronized (a){
@@ -38,7 +39,7 @@ public class LockLayoutTest {
             }
         };
         t1.start();
-        Thread.sleep(1000);
+        Thread.sleep(1000);*/
         System.out.println("t1 lock ing");
         System.out.println(ClassLayout.parseInstance(a).toPrintable());//轻量锁
         //此时t1线程把a锁住，并未释放。但是sync主线程这个时候过来竞争啊这把锁。所以锁会升级为重量锁
