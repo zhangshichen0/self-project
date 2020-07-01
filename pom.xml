@@ -19,7 +19,7 @@
         <logback.version>1.1.11</logback.version>
         <curator.version>2.10.0</curator.version>
         <commons-lang3.version>3.4</commons-lang3.version>
-        <quartz.version>2.2.1</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
         <lombok.version>1.16.4</lombok.version>
     </properties>
 
@@ -249,7 +249,7 @@
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>
-                <version>2.3.1</version>
+                <version>2.3.2</version>
             </dependency>
 
 
