@@ -2,6 +2,8 @@ package com.self.jol;
 
 import org.openjdk.jol.info.ClassLayout;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * java对象布局--在mac上需要授权
  *
@@ -11,11 +13,13 @@ import org.openjdk.jol.info.ClassLayout;
  */
 public class JavaObjectLayout {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
+        //为了启动偏向锁
+        TimeUnit.SECONDS.sleep(10);
         Object object = new Object();
 
-        ClassLayout.parseInstance(object).toPrintable();
+        System.out.println(ClassLayout.parseInstance(object).toPrintable());
 
     }
 
