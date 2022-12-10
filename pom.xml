@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <spring-version>5.0.4.RELEASE</spring-version>
+        <spring-version>6.0.0</spring-version>
         <slf4j.version>1.7.22</slf4j.version>
         <logback.version>1.1.11</logback.version>
         <curator.version>2.10.0</curator.version>
